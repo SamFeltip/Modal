@@ -1,16 +1,16 @@
-function createModal(intTargetModalID="", strHeaderText="default modal header", strModalBody="<div class='modalLoading'></div>"){
-
-    let dialog = document.createElement('dialog');
+function createModalElement(intTargetModalID = "", strHeaderText = "default modal header", strModalBody = "<div class='modalLoading'></div>")
+{
+    var dialog = document.createElement('dialog');
     dialog.id = intTargetModalID;
     dialog.className = 'samModal';
 
-    let headerElement = document.createElement('div');
+    var headerElement = document.createElement('div');
     headerElement.className = 'header';
 
-    let headerText = document.createElement('p');
+    var headerText = document.createElement('p');
     headerText.innerHTML = strHeaderText
 
-    let closeModalButton = document.createElement('button');
+    var closeModalButton = document.createElement('button');
     closeModalButton.className = 'closeModal';
     closeModalButton.textContent = 'X';
 
@@ -18,7 +18,7 @@ function createModal(intTargetModalID="", strHeaderText="default modal header", 
     headerElement.appendChild(headerText);
     headerElement.appendChild(closeModalButton);
 
-    let modalBody = document.createElement('div');
+    var modalBody = document.createElement('div');
     modalBody.className = 'body';
 
     modalBody.innerHTML = strModalBody;
@@ -31,71 +31,99 @@ function createModal(intTargetModalID="", strHeaderText="default modal header", 
     document.body.appendChild(dialog);
 
     addClosingProceduresToModal(dialog)
+    dialog.classList.add("samModalapplied")
 
     return dialog
-
 }
 
 
-const openModalButtons = document.getElementsByClassName('openModal');
-
-for (let indexOfOpenModalButtons = 0; indexOfOpenModalButtons < openModalButtons.length; indexOfOpenModalButtons++) {
-    
-    let HTMLOpenModalButton = openModalButtons[indexOfOpenModalButtons]
-    
-    HTMLOpenModalButton.addEventListener('click', function() {
-
-        let intTargetModalID = HTMLOpenModalButton.getAttribute('data-modal-id');
-        let strHeaderText = HTMLOpenModalButton.getAttribute('data-modal-header');
-    
-        let strModalAjaxURL = HTMLOpenModalButton.getAttribute('data-modal-url');
-        let HTMLModal = document.getElementById(intTargetModalID);
-        
-        if(!HTMLModal){
-            HTMLModal = createModal(intTargetModalID, strHeaderText)
-        }
-
-        HTMLModal.showModal();
-        let HTMLModalBody = HTMLModal.getElementsByClassName("body")[0]
-    
-        
-        if(strModalAjaxURL){
-            fetch(strModalAjaxURL).then(async (response) => {
-                let strHtml = await response.text();
-                HTMLModalBody.innerHTML = strHtml
-            }).catch(err => {
-                console.error(err);
-            })
-        }
-
-    })
+async function populateModalWithAjaxRequest (modalBody, strModalAjaxURL)
+{
+    var response = await fetch(strModalAjaxURL)
+    var modalAjaxBodyContent = await response.text();
+    modalBody.innerHTML = modalAjaxBodyContent
 }
 
 
+function showModalOnButtonPress(event)
+{
+    var openModalButton = event.target
+    var intTargetModalID = openModalButton.getAttribute('data-modal-id');
+    var strHeaderText = openModalButton.getAttribute('data-modal-header');
 
-function addClosingProceduresToModal(modal){
-    modal.addEventListener('click', function(event) {
-        // Check if click was outside the dialog
-        if (event.target === modal) {
+    var strModalAjaxURL = openModalButton.getAttribute('data-modal-url');
+    var modal = document.getElementById(intTargetModalID);
+
+    if (!modal) 
+    {
+        modal = createModalElement(intTargetModalID, strHeaderText)
+    }
+
+    modal.showModal();
+    var modalBody = modal.getElementsByClassName("body")[0]
+
+
+    if (strModalAjaxURL) 
+    {
+        populateModalWithAjaxRequest(modalBody, strModalAjaxURL)
+    }
+}
+
+
+function initialiseSamModalOpenningProcedures()
+{
+    var openModalButtons = document.getElementsByClassName('openModal');
+
+    for (var ombCount = 0; ombCount < openModalButtons.length; ombCount++)
+    {
+        // ssHasClass
+        if(!openModalButtons[ombCount].classList.contains('openSamModalapplied'))
+        {
+            openModalButtons[ombCount].addEventListener('click', showModalOnButtonPress)
+            // ssAddClass
+            openModalButtons[ombCount].classList.add('openSamModalapplied')
+
+        }
+    }
+}
+
+
+function addClosingProceduresToModal(modal)
+{
+    modal.addEventListener('click', function (event){
+        // Check if event.target (the thing being clicked) was the modal 
+        // this will only be true if you click on the modal's ::backdrop
+        if (event.target === modal)
+        {
             modal.close();
         }
     })
 
-    let HTMLCloseModalButton = modal.getElementsByClassName("closeModal")[0]
-    
-    HTMLCloseModalButton.addEventListener('click', function(){
-      modal.close()
+    var closeModalButton = modal.getElementsByClassName("closeModal")[0]
+
+    closeModalButton.addEventListener('click',  function(){
+        modal.close()
     })
 }
 
-const modals = document.getElementsByClassName('samModal');
 
-for (let indexOfModals = 0; indexOfModals < modals.length; indexOfModals++) {
-    let modal = modals[indexOfModals]
-    addClosingProceduresToModal(modal)
+function initialiseSamModalClosingProcedures()
+{
+    var modals = document.getElementsByClassName('samModal');
+
+    for (var mCount = 0; mCount != modals.length; mCount++)
+    {
+        // ssHasClass
+        if (!modals[mCount].classList.contains("closeSamModalapplied"))
+        {
+            addClosingProceduresToModal(modals[mCount])
+            // ssAddClass
+            modals[mCount].classList.add("closeSamModalapplied")
+        }
+    }
 }
 
 
-// document.querySelectorAll('.samModal').forEach(modal => {
-//     addClosingProceduresToModal(modal)
-// })
+initialiseSamModalOpenningProcedures()
+
+initialiseSamModalClosingProcedures()
