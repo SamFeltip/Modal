@@ -2,10 +2,10 @@
 
 ## Setup:
 
-git clone https://github.com/SamFeltip/Sams-Ajax-Modal.git
+`git clone https://github.com/SamFeltip/Sams-Ajax-Modal.git`
 
-cd Sams-Ajax-Modal/
+`cd Sams-Ajax-Modal/`
 
-npm install
+`npm install`
 
-node server.js
+`node server.js`
