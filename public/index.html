@@ -60,3 +60,36 @@
 
 </body>
 </html>
+
+<!-- TODO -->
+<!-- Should be autogenerating and ajax -->
+<!-- hyperlink <a> instead of button-->
+<!-- data-modal-url should be href prop of <a>-->
+<!-- in hyperlink there's a title instaed of data-modal-header -->
+<!-- .thickbox instead of .openModal -->
+<!-- end of url should include height/width params which define the modal size (height and width)-->
+<!-- default height and width are 630x440 -->
+
+<!-- should be able to run ssThickbox(url) that will open a modal with the AJAX and widht and height from URL  -->
+<!-- give .body an id of #TB_ajaxContent -->
+<!-- get styles from http://sslib.co.uk/ssLib/Pages/Thickbox.asp -->
+
+<!-- play with animations -->
+<!-- see if its possible to make it emerge from the source <a> tag -->
+
+<!-- see if it's possible to change the size of the box after it's open (running script on open or on button press in the modal) -->
+
+
+<!-- http://sslib.co.uk/ssLib/Include/ssThickbox.js -->
+
+<!-- 
+var queryString = url.replace(/^[^\?]+\??/,'');
+var params = tb_parseQuery( queryString );
+
+TB_WIDTH = (params['width']*1) + 30 || 630; //defaults to 630 if no paramaters were added to URL
+TB_HEIGHT = (params['height']*1) + 40 || 440; //defaults to 440 if no paramaters were added to URL 
+-->
+
+
+
+<a class="thickbox" data-modal-id="modal4" title="Hello, this is Modal 4!" href="/customer.asp?customerId=10&height=320&width=480">Open Modal 4</a>

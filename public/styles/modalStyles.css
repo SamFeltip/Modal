@@ -6,6 +6,7 @@
 @keyframes show{
   from {
       transform: scale(0);
+
   }
 
   80% {
