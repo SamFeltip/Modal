@@ -1,4 +1,4 @@
-function createModal(intTargetModalID="", strHeaderText="default modal header", strModalBody="<p>default modal body</p>"){
+function createModal(intTargetModalID="", strHeaderText="default modal header", strModalBody="<div class='modalLoading'></div>"){
 
     let dialog = document.createElement('dialog');
     dialog.id = intTargetModalID;
