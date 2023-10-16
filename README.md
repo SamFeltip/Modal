@@ -1,7 +1,7 @@
 ## Modal code
 This repo has some code for creating a modal (pop up) with javascript and the <dialog> element.
 
-you can either run an express server to try out the ajax modals, or just open public/index.html in your browser to see the normal, local behaviour.
+You can either run an express server to try out the ajax modals, or just open `public/index.html` in your browser to see the normal, local behaviour.
 
 ## Setup:
 
