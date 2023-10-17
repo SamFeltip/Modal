@@ -20,40 +20,16 @@
   </nav>
 
   <section>
-    <h2>Simple Modal</h2>
-    <button class="openModal" data-modal-id="modal1">Open Modal 1</button>
-  
-    <dialog id="modal1" class="samModal">
-        <div class="header">
-          <p>Hello, this is modal 1!</p>
-          <button class="closeModal">X</button>
-        </div>
-        <div class="body">
-          <p>Press the button to close this modal.</p>
-        </div>
-    </dialog>
-  
-    <h2>Modal with AJAX</h2>
-    <button class="openModal" data-modal-id="modal2" data-modal-url="/getAjaxData">Open Modal 2</button>
-  
-  
-    <dialog id="modal2" class="samModal">
-      <div class="header">
-        <p>Hello, this is modal 2!</p>
-        <button class="closeModal">X</button>
-      </div>
-      <div class="body">
-        <!-- this will display until the body is replaced by the AJAX request -->
-        <div class="modalLoading"></div>
-      </div>
-    </dialog>
   
     <h2>Auto generated Modal</h2>
-    <button class="openModal" data-modal-id="modal3" data-modal-header="Hello, this is Modal 3!">Open Modal 3</button>
+    <a class="thickbox" title="Hello, this is Modal 3!">Open Modal 3</a>
     
     <h2>Auto generated AJAX Modal</h2>
-    <button class="openModal" data-modal-id="modal4" data-modal-header="Hello, this is Modal 4!" data-modal-url="/information">Open Modal 4</button>
+    <a class="thickbox" title="Hello, this is Modal 4!" href="/information">Open Modal 4</a>
     
+    <h2>Mini Modal</h2>
+    <a class="thickbox" title="this is a <em>mini</em> Modal" href="/information?width=400&height=200">Open mini modal</a>
+
   </section>
 
   
@@ -63,12 +39,12 @@
 
 <!-- TODO -->
 <!-- Should be autogenerating and ajax -->
-<!-- hyperlink <a> instead of button-->
-<!-- data-modal-url should be href prop of <a>-->
-<!-- in hyperlink there's a title instaed of data-modal-header -->
-<!-- .thickbox instead of .openModal -->
+<!-- hyperlink <a> instead of button ✅ -->
+<!-- href should be href prop of <a> ✅-->
+<!-- in hyperlink there's a title instaed of data-modal-header ✅ -->
+<!-- .thickbox instead of .openModal✅ -->
 <!-- end of url should include height/width params which define the modal size (height and width)-->
-<!-- default height and width are 630x440 -->
+<!-- default height and width are 630x440 ✅ -->
 
 <!-- should be able to run ssThickbox(url) that will open a modal with the AJAX and widht and height from URL  -->
 <!-- give .body an id of #TB_ajaxContent -->
@@ -77,7 +53,7 @@
 <!-- play with animations -->
 <!-- see if its possible to make it emerge from the source <a> tag -->
 
-<!-- see if it's possible to change the size of the box after it's open (running script on open or on button press in the modal) -->
+<!-- see if it's possible to change the size of the box after it's open (running script on open or on a press in the modal) -->
 
 
 <!-- http://sslib.co.uk/ssLib/Include/ssThickbox.js -->
@@ -89,7 +65,3 @@ var params = tb_parseQuery( queryString );
 TB_WIDTH = (params['width']*1) + 30 || 630; //defaults to 630 if no paramaters were added to URL
 TB_HEIGHT = (params['height']*1) + 40 || 440; //defaults to 440 if no paramaters were added to URL 
 -->
-
-
-
-<a class="thickbox" data-modal-id="modal4" title="Hello, this is Modal 4!" href="/customer.asp?customerId=10&height=320&width=480">Open Modal 4</a>

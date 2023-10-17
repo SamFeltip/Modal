@@ -1,67 +1,92 @@
-.samModal {
-  padding: 0;
-  border-radius: 5px;
+.thickbox {
+  color: #23a8bd;
+  text-decoration: none;
+}
+
+.thickbox:hover {
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 @keyframes show{
-  from {
-      transform: scale(0);
 
+  0% {
+    transform: rotate(0deg) scale(0); 
+    
   }
 
-  80% {
-    transform: scale(1.1);
-  }
+  100% { 
+    position: fixed;
 
-  to {
-    transform: scale(1);
+    transform: rotate(360deg) scale(1);
+    
   }
 }
 
-.samModal[open] {
-  animation: show 0.2s ease normal;
+#TB_window {
+
+  position: fixed;
+  inset-inline-start: 0px;
+  /* inset-inline-end: 100px; */
+  
+  padding: 0;
+  
+  background: #ffffff;
+  
+  color: #000000;
+  border: 1px solid #716D67;
+  border-radius: 3px;
+
+  animation: show 0.2s ease;
 }
 
-
-.samModal::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+#TB_window #TB_closeWindowButton:hover {
+  text-decoration: underline;
 }
 
-.samModal .body {
-  padding: 0.5em;
+/* reset default behaviour created by <a> */
+#TB_window:focus-visible {
+  outline: none;
+}
+
+#TB_window::backdrop {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+#TB_window #TB_ajaxContent {
+  padding: 2px 15px 15px 15px;
+  overflow-wrap: anywhere;
 } 
 
-.samModal .header {
+#TB_window #TB_title {
   padding: 0.5em;
-  border-bottom: 2px solid;
+  background-color: #f38630;
+  color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 10px;
-}
-
-.samModal .header p {
   margin: 0;
 
 }
 
-.samModal .closeModal {
+#TB_window.closing::backdrop {
+  background: none;
+  transition-duration: 0.2s;
+}
+
+#TB_window.closing {
+  /* animation: close 2s ease; */
+  transform: scale(0);
+  transition-duration: 0.2s;
+}
+
+
+
+#TB_window #TB_closeWindowButton {
   cursor: pointer;
 }
 
 
 /* optional: while we wait for ajax, put a loading spinner in the modal body */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.samModal .modalLoading {
-  margin: 20px auto;
-  width: 3px;
-  height: 3px;
-  padding: 10px;
-  border: 2px black solid;
-  animation: spin 2s linear infinite;
-
-}

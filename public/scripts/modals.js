@@ -1,27 +1,61 @@
-function createModalElement(intTargetModalID = "", strHeaderText = "default modal header", strModalBody = "<div class='modalLoading'></div>")
+function addClosingProceduresToModal(modal)
 {
+    modal.addEventListener('click', function (event){
+        // Check if event.target (the thing being clicked) was the modal 
+        // this will only be true if you click on the modal's ::backdrop
+        if (event.target === modal)
+        {
+            modal.classList.add('closing');
+            setTimeout(() => {
+                modal.remove()
+            }, 200)
+        }
+    })
+
+    var TB_closeWindowButtonButton = document.getElementById("TB_closeWindowButton")
+
+    TB_closeWindowButtonButton.addEventListener('click',  function(){
+        modal.classList.add('closing');
+        setTimeout(() => {
+            modal.remove()
+        }, 200)
+    })
+}
+
+function createModalElement(strHeaderText = "default modal header", strModalAjaxURL)
+{
+    
+    var {width, height} = getThickboxDimentionsFromUrl(strModalAjaxURL)
+
     var dialog = document.createElement('dialog');
-    dialog.id = intTargetModalID;
-    dialog.className = 'samModal';
+    dialog.id = "TB_window";
+
+    dialog.style.maxWidth = width + "px"
+    dialog.style.maxHeight = height + "px"
 
     var headerElement = document.createElement('div');
-    headerElement.className = 'header';
+    headerElement.id = 'TB_title';
 
-    var headerText = document.createElement('p');
-    headerText.innerHTML = strHeaderText
+    var headerText = document.createElement('div');
+    headerText.id = 'TB_ajaxWindowTitle';
+    headerText.innerHTML = strHeaderText;
 
-    var closeModalButton = document.createElement('button');
-    closeModalButton.className = 'closeModal';
-    closeModalButton.textContent = 'X';
+    var TB_closeWindowButtonLink = document.createElement('a');
+    TB_closeWindowButtonLink.id = 'TB_closeWindowButton';
+    TB_closeWindowButtonLink.textContent = 'close';
 
     // Add the header text and close button to the header
     headerElement.appendChild(headerText);
-    headerElement.appendChild(closeModalButton);
+    headerElement.appendChild(TB_closeWindowButtonLink);
 
     var modalBody = document.createElement('div');
-    modalBody.className = 'body';
+    modalBody.id = 'TB_ajaxContent';
 
-    modalBody.innerHTML = strModalBody;
+    // default modal body while the ajax loads 
+    var loadingImg = document.createElement('img')
+    loadingImg.src= 'http://sslib.co.uk/ssLib/Images/ssLoading.gif'
+    loadingImg.alt = 'loading';
+    modalBody.appendChild(loadingImg);
 
     // Add the header and body to the dialog
     dialog.appendChild(headerElement);
@@ -31,7 +65,7 @@ function createModalElement(intTargetModalID = "", strHeaderText = "default moda
     document.body.appendChild(dialog);
 
     addClosingProceduresToModal(dialog)
-    dialog.classList.add("samModalapplied")
+    dialog.classList.add("TB_windowapplied")
 
     return dialog
 }
@@ -41,89 +75,87 @@ async function populateModalWithAjaxRequest (modalBody, strModalAjaxURL)
 {
     var response = await fetch(strModalAjaxURL)
     var modalAjaxBodyContent = await response.text();
-    modalBody.innerHTML = modalAjaxBodyContent
+
+    if(response.ok){
+        modalBody.innerHTML = modalAjaxBodyContent
+    }else{
+        modalBody.innerHTML = '';
+    }
 }
 
+function getThickboxDimentionsFromUrl(strModalAjaxURL)
+{
+    var default_thickbox_width = "630";
+    var default_thickbox_height = "440";
+
+    if(!strModalAjaxURL){
+        return {width: default_thickbox_width, height: default_thickbox_height}
+    }
+
+    var url_params_starting_index = strModalAjaxURL.indexOf("?")
+    params_string = strModalAjaxURL.substring(url_params_starting_index)
+
+    const searchParams = new URLSearchParams(params_string);
+    
+    var width = default_thickbox_width;
+    var height = default_thickbox_height;
+
+    if(searchParams.has('width')){
+        width = searchParams.get('width')
+    }
+
+    if(searchParams.has('height')){
+        height = searchParams.get('height')
+    }
+
+    return {width, height}
+
+    // console.log(searchParams.get('width'));
+    // console.log(searchParams.get('height'));
+
+    // width_position = strModalAjaxURL.indexOf("&width=")+1 || strModalAjaxURL.indexOf("?width=")+1
+    // console.log(width_position);
+    
+    // return {width: default_width, height: default_height}
+
+    // if(strModalAjaxURL.contains("&width=") || strModalAjaxURL.contains("?width=")){
+
+    // }
+}
 
 function showModalOnButtonPress(event)
 {
-    var openModalButton = event.target
-    var intTargetModalID = openModalButton.getAttribute('data-modal-id');
-    var strHeaderText = openModalButton.getAttribute('data-modal-header');
+    // stop <a> from redirecting to [href]
+    event.preventDefault();
 
-    var strModalAjaxURL = openModalButton.getAttribute('data-modal-url');
-    var modal = document.getElementById(intTargetModalID);
+    var thickboxButton = event.target
+    var strHeaderText = thickboxButton.getAttribute('title');
 
-    if (!modal) 
-    {
-        modal = createModalElement(intTargetModalID, strHeaderText)
-    }
+    var strModalAjaxURL = thickboxButton.getAttribute('href');
+    var modal = createModalElement(strHeaderText, strModalAjaxURL)
 
     modal.showModal();
-    var modalBody = modal.getElementsByClassName("body")[0]
-
-
-    if (strModalAjaxURL) 
-    {
-        populateModalWithAjaxRequest(modalBody, strModalAjaxURL)
-    }
+    
+    var modalBody = document.getElementById('TB_ajaxContent')
+    
+    populateModalWithAjaxRequest(modalBody, strModalAjaxURL)
 }
 
 
-function initialiseSamModalOpenningProcedures()
+function initialiseTB_windowOpenningProcedures()
 {
-    var openModalButtons = document.getElementsByClassName('openModal');
+    var thickboxButtons = document.getElementsByClassName('thickbox');
 
-    for (var ombCount = 0; ombCount < openModalButtons.length; ombCount++)
+    for (var ombCount = 0; ombCount < thickboxButtons.length; ombCount++)
     {
         // ssHasClass
-        if(!openModalButtons[ombCount].classList.contains('openSamModalapplied'))
+        if(!thickboxButtons[ombCount].classList.contains('openTB_windowapplied'))
         {
-            openModalButtons[ombCount].addEventListener('click', showModalOnButtonPress)
+            thickboxButtons[ombCount].addEventListener('click', showModalOnButtonPress)
             // ssAddClass
-            openModalButtons[ombCount].classList.add('openSamModalapplied')
-
+            thickboxButtons[ombCount].classList.add('openTB_windowapplied')
         }
     }
 }
 
-
-function addClosingProceduresToModal(modal)
-{
-    modal.addEventListener('click', function (event){
-        // Check if event.target (the thing being clicked) was the modal 
-        // this will only be true if you click on the modal's ::backdrop
-        if (event.target === modal)
-        {
-            modal.close();
-        }
-    })
-
-    var closeModalButton = modal.getElementsByClassName("closeModal")[0]
-
-    closeModalButton.addEventListener('click',  function(){
-        modal.close()
-    })
-}
-
-
-function initialiseSamModalClosingProcedures()
-{
-    var modals = document.getElementsByClassName('samModal');
-
-    for (var mCount = 0; mCount != modals.length; mCount++)
-    {
-        // ssHasClass
-        if (!modals[mCount].classList.contains("closeSamModalapplied"))
-        {
-            addClosingProceduresToModal(modals[mCount])
-            // ssAddClass
-            modals[mCount].classList.add("closeSamModalapplied")
-        }
-    }
-}
-
-
-initialiseSamModalOpenningProcedures()
-
-initialiseSamModalClosingProcedures()
+initialiseTB_windowOpenningProcedures()
