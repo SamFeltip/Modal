@@ -18,19 +18,17 @@
 
   100% { 
     position: fixed;
-
     transform: rotate(360deg) scale(1);
-    
   }
 }
 
-#TB_window {
+dialog#TB_window {
 
   padding: 0;
   
   background: #ffffff;
   
-  color: #000000;
+  /* color: #000000; */
   border: 1px solid #716D67;
   border-radius: 3px;
 
@@ -47,13 +45,13 @@
   flex-direction: column;
 }
 
-#TB_window #TB_title {
+dialog#TB_window #TB_title {
   
   display: flex;
 
   padding: 0.5em;
-  background-color: #f38630;
-  color: white;
+  /* background-color: #f38630; */
+  /* color: white; */
   
   flex-direction: row;
   justify-content: space-between;
@@ -61,7 +59,7 @@
   margin: 0;
 }
 
-#TB_window #TB_ajaxContent {
+dialog#TB_window #TB_ajaxContent {
   padding: 2px 15px 15px 15px;
   
   overflow-y: auto;
@@ -71,33 +69,33 @@
 
 } 
 
-#TB_window #TB_closeWindowButton:hover {
+dialog#TB_window #TB_closeWindowButton:hover {
   text-decoration: underline;
 }
 
 /* reset default behaviour created by <a> */
-#TB_window:focus-visible {
+dialog#TB_window:focus-visible {
   outline: none;
 }
 
-#TB_window::backdrop {
+dialog#TB_window::backdrop {
   transition: background 0.2s ease;
   background: rgba(255, 255, 255, 0.6);
 }
 
-#TB_window.closing::backdrop {
+dialog#TB_window.closing::backdrop {
   background: none;
   transition: background 0.2s ease;
 }
 
-#TB_window.closing {
+dialog#TB_window.closing {
   transform: scale(0);
   transition: transform 0.2s ease;
 }
 
 
 
-#TB_window #TB_closeWindowButton {
+dialog#TB_window #TB_closeWindowButton {
   cursor: pointer;
 }
 

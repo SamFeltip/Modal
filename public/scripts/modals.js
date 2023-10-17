@@ -22,6 +22,50 @@ function addClosingProceduresToModal(modal)
     })
 }
 
+
+function getThickboxDimentionsFromUrl(strModalAjaxURL)
+{
+    var default_thickbox_width = "630";
+    var default_thickbox_height = "440";
+
+    if(!strModalAjaxURL){
+        return {width: default_thickbox_width, height: default_thickbox_height}
+    }
+
+    var url_params_starting_index = strModalAjaxURL.indexOf("?")
+    var params_string = strModalAjaxURL.substring(url_params_starting_index + 1)
+
+    var search_params = params_string.split("&");
+
+    var width = default_thickbox_width;
+    var height = default_thickbox_height;
+
+    for(var pCount=0 ; pCount != search_params.length ; pCount++){
+        
+        var param_key_value_pair = search_params[pCount].split("=")
+
+        if(param_key_value_pair[0] === "width"){
+            width = param_key_value_pair[1]
+        }
+
+        if(param_key_value_pair[0] === "height"){
+            height = param_key_value_pair[1]
+        }
+    }
+
+    // const searchParams = new URLSearchParams(params_string);
+
+    // if(searchParams.has('width')){
+    //     width = searchParams.get('width')
+    // }
+
+    // if(searchParams.has('height')){
+    //     height = searchParams.get('height')
+    // }
+
+    return {width, height}
+}
+
 function createModalElement(strModalAjaxURL, strHeaderText)
 {
     
@@ -40,13 +84,20 @@ function createModalElement(strModalAjaxURL, strHeaderText)
     headerText.id = 'TB_ajaxWindowTitle';
     headerText.innerHTML = strHeaderText;
 
+    
+
     var TB_closeWindowButtonLink = document.createElement('a');
     TB_closeWindowButtonLink.id = 'TB_closeWindowButton';
     TB_closeWindowButtonLink.textContent = 'close';
 
+    // TB_closeAjaxWindow
+    var TB_closeAjaxWindow = document.createElement('div');
+    TB_closeAjaxWindow.id = 'TB_closeAjaxWindow'
+    TB_closeAjaxWindow.appendChild(TB_closeWindowButtonLink)
+
     // Add the header text and close button to the header
     headerElement.appendChild(headerText);
-    headerElement.appendChild(TB_closeWindowButtonLink);
+    headerElement.appendChild(TB_closeAjaxWindow);
 
     var modalBody = document.createElement('div');
     modalBody.id = 'TB_ajaxContent';
@@ -94,48 +145,6 @@ async function populateModalWithAjaxRequest (strModalAjaxURL)
     }
 }
 
-function getThickboxDimentionsFromUrl(strModalAjaxURL)
-{
-    var default_thickbox_width = "630";
-    var default_thickbox_height = "440";
-
-    if(!strModalAjaxURL){
-        return {width: default_thickbox_width, height: default_thickbox_height}
-    }
-
-    var url_params_starting_index = strModalAjaxURL.indexOf("?")
-    var params_string = strModalAjaxURL.substring(url_params_starting_index + 1)
-
-    var search_params = params_string.split("&");
-
-    var width = default_thickbox_width;
-    var height = default_thickbox_height;
-
-    for(var pCount=0 ; pCount != search_params.length ; pCount++){
-        
-        var param_key_value_pair = search_params[pCount].split("=")
-
-        if(param_key_value_pair[0] === "width"){
-            width = param_key_value_pair[1]
-        }
-
-        if(param_key_value_pair[0] === "height"){
-            height = param_key_value_pair[1]
-        }
-    }
-
-    // const searchParams = new URLSearchParams(params_string);
-
-    // if(searchParams.has('width')){
-    //     width = searchParams.get('width')
-    // }
-
-    // if(searchParams.has('height')){
-    //     height = searchParams.get('height')
-    // }
-
-    return {width, height}
-}
 
 function resizeThickbox(width, height)
 {
@@ -146,6 +155,7 @@ function resizeThickbox(width, height)
 
 
 }
+
 
 function ssNewThickbox(strModalAjaxURL, strHeaderText="")
 {
@@ -161,6 +171,7 @@ function ssNewThickbox(strModalAjaxURL, strHeaderText="")
     populateModalWithAjaxRequest(strModalAjaxURL)
 }
 
+
 function showModalOnButtonPress(event)
 {
     // stop <a> from redirecting to [href]
@@ -170,6 +181,9 @@ function showModalOnButtonPress(event)
     var strHeaderText = thickboxButton.getAttribute('title');
 
     var strModalAjaxURL = thickboxButton.getAttribute('href');
+    
+    // run check animation function in thickboxAnimation.js
+    // defineModalAnimation && defineModalAnimation(classList)
 
     ssNewThickbox(strModalAjaxURL, strHeaderText)
 }

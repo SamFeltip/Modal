@@ -1,0 +1,17 @@
+#TB_closeAjaxWindow, 
+#TB_title
+{
+  background-color:#1c3144 !important;
+  /*color:white;*/
+}
+
+#TB_closeAjaxWindow a
+{
+  color:#f6f6f6 !important;
+}
+
+#TB_ajaxWindowTitle
+{
+  color:white !important;
+
+}

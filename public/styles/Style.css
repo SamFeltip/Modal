@@ -1,0 +1,2525 @@
+/*
+colours used
+#007ac2 (MAIN COLOUR: process names in menu, borders of inputs and fieldsets, top bar of thickbox, background of sweettitle, overlay text, background of header and topnav)
+#006b3d (SECONDARY COLOUR: hyperlinks, buttons, module names in menu, borders of menu, hovered buttons, colouring of datepicker)
+#f6f6f6 (BACKGROUND COLOR: background of page, background of disabled fields and buttons, close link in thickbox)
+lightgoldenrodyellow (EXTRAS: buttons, side bar and top nav headers of tutorial pages)
+
+#f38630 topnav, buttons
+
+'black' and 'white' are also used in various places 
+
+23a8bd
+
+#8c6239 (blue) main hyperlinks, button hovers
+#a00028 (purple) sidebar hyperlinks, button, sweettitle
+#89614d (brown) topnav, hr, top border of sidebar in narrow screen(also single pixel in body.png?v=2)
+#006B3D (green) thickbox header, fieldset border, field borders
+
+#f6f6f6 (very light grey) background of sidebar (also left side of body.png?v=2)
+
+#ffffda (very light yellow) required inputs
+
+
+values used
+60px (height of header/top nav)
+220px (width of sidebar)
+*/
+
+/*LAYOUT, FONTS AND COLOURS OF MAIN SECTIONS (in order of page hierarchy)*/
+html
+{
+  background:url(../Images/random.png?v=2) repeat 0 0;
+  background-color:#fbfbfb;
+  background:repeat-y -330px 0 url(../Images/Body.png?v=2)\9; /*IE8 and below*/
+}
+
+body
+{
+  background-image:url(../Images/Body.png?v=2);
+  background-position:-111px 0;
+  background-repeat:repeat-y;
+  background:url(../Images/random.png?v=2) repeat 0 0, url(../Images/Body.png?v=2) repeat-y -111px 0;
+  background-color:#fbfbfb;
+  font-family: 'Assistant','Dosis', Lato, sans-serif;;
+  /*font-family: 'Cambria', serif;*/
+  font-size:12pt;
+  margin:0;
+  padding:0;
+  color:#181818;
+  letter-spacing: 0.5px;
+  line-height: 130%;
+  font-weight: lighter;
+}
+
+
+
+#RDToverlaytext
+{
+  color:#89614d;
+  display:none;
+  font-size:small;
+}
+
+#topnav
+{
+  background-image:none;
+  background-position:left top;
+  background-repeat:repeat-x;
+  background-color:#1c3144;
+  font-size:large;
+  height:64px;;
+  margin:0;
+  padding:6px;
+  padding-top:0;
+}
+
+#topnavlinks
+{
+  float:left;
+  width:250px;
+}
+
+#topnavnotes
+{
+  float:right;
+  position:relative;
+  width:100px;
+  z-index:10;
+}
+
+#topnav h1
+{
+  clear:left;
+  color:lightgoldenrodyellow;
+  margin:0;
+  padding-top:4px;
+}
+
+#topnav a.hiddenlink
+{
+  color:#fa6900;
+}
+
+#main a.hiddenlink
+{
+  color:#b0b0b0;
+}
+
+#wrapper
+{
+  float:right;
+  margin-left:-220px;
+  *margin-left:-20px; /*IE7 and below*/
+  width:100%;
+  padding-right:5px;
+}
+
+.classicstyle #wrapper
+{
+  float:none;
+  margin-left:0;
+  width:100%;
+}
+
+#content
+{
+  background:url(../Images/Fade.png?v=2) repeat-x 0 -60px;
+  background-image:none \9; /*IE8 and below*/
+
+  margin-left:220px;
+  margin-right:0;
+}
+
+
+
+.details #content
+{
+  background-image:none;
+}
+
+body.datamine #content
+{
+  margin-left:0;
+  background:url(../Images/Fade.png?v=2) repeat-x 0px -60px;
+  _background-image:none;
+}
+
+body.datamine
+{
+  background-position:-330px
+}
+
+body.datamine #topnav,
+body.datamine #wrapper
+{
+  max-width:1666px;
+}
+
+.details #content
+{
+  background-image:none;
+}
+
+#main
+{
+  min-height:120px;
+  padding-left:10px;
+  padding-top:10px;
+}
+
+#sidebar
+{
+  background-image:url(../Images/Body.png?v=2);
+  background-position:-111px -60px;
+  background-repeat:repeat-y;
+  background:url(../Images/random.png?v=2) repeat 0 -60px, url(../Images/Body.png?v=2) repeat-y -111px -60px;
+  background-color:#e0e4cc;
+  float:left;
+  font-size:90%;
+  left:0;
+  line-height:120%;
+  min-height:800px;
+  _height:800px;
+  position:absolute;
+  width:220px;
+  clear:left;
+}
+
+#sidebarcontent
+{
+  background:url(../Images/fade.png?v=2) repeat-x 0 -120px;
+  _background-image:none;
+  margin:0;
+  padding:2px 0 0 18px;
+}
+
+#sidebar h1,
+#sidebar p
+{
+  padding:3px 10px;
+}
+
+#footer
+{
+  
+  background:url(../Images/Footer.png?v=2) right bottom no-repeat;
+  _background:url(../Images/ssIePngFixBlank.gif) right bottom no-repeat;
+  bottom:0;
+  color:white;
+  display:none;
+  height:40px;
+  right:20px;
+  position:fixed;
+  text-align:right;
+  width:125px;
+}
+
+
+/*LOGIN PAGE*/
+.login #frmMain
+{
+  width:400px;
+}
+
+.login input
+{
+  font-family:sans-serif;  /*not all fonts eg calibri, have the appropriate password asterisk characters*/
+}
+
+.login input.pushbutton
+{
+  font-family:font-family: 'Roboto Slab', 'Nunito', 'Gadugi', Josefin Sans', sans-serif; /*for the submit button in the login screen override the font width just set above for the login*/
+}
+
+
+/*HEADINGS, PARAGRAPHS, LISTS etc. (in alphabetical order)*/
+h1
+{
+  color:#556573;
+  font-family: "Assistant";
+  font-size:166%;
+  font-weight: 600;
+  line-height:120%;
+  margin:0;
+  margin-top:10px;
+  padding-left:12px;
+}
+
+h2
+{
+  font-family: "Assistant";
+  font-weight: 600;
+  font-size:126%;
+  padding-left:5px;
+  vertical-align: middle;
+}
+
+
+h3
+{
+  font-size:90%;
+  padding-left:5px;
+}
+
+h4
+{
+  font-size:85%;
+  padding-left:5px;
+}
+
+p
+{
+  line-height:1.2;
+  margin:7px 3px;;
+  padding:3px;
+}
+
+hr
+{
+  background-color:#91251c;
+  border:1px solid #91251c;
+}
+
+ul
+{
+  list-style:none;
+  margin:0;
+  padding-left:10px;
+}
+
+
+/*HYPERLINKS (in order of page hierarchy)*/
+a
+{
+  color:#91251c;
+  xfont-weight:bold;
+}
+
+a:link,
+a:visited
+{
+  text-decoration:none;
+}
+
+a:hover,
+a:active
+{
+  color:black;
+  text-decoration:underline;
+}
+
+#topnav a
+{
+  color:#f6f6f6;
+}
+
+#topnav a:link,
+#topnav a:visited
+{
+  text-decoration:none;
+}
+
+#topnav a:hover,
+#topnav a:active
+{
+  text-decoration:underline;
+}
+
+#sidebar a
+{
+  color:#556573;
+  /*font-size:85%;*/
+}
+
+#sidebar a:link,
+#sidebar a:visited
+{
+  text-decoration:none;
+}
+
+#sidebar a:hover,
+#sidebar a:active
+{
+  color:#101010;
+  text-decoration:underline;
+}
+
+#sidebarcontent li
+{
+  padding-bottom:7px;
+}
+
+#sidebarcontent small
+{
+  font-size:60%;
+  padding-left:2px;
+  position:relative;
+  top:2px;
+  *top:-1px; /*IE7 and below*/
+}
+
+#sidebarcontent span.notAHyperlink
+{
+  color:#006b3d;
+  font-weight:bold;
+}
+
+#sidebarcontent small a
+{
+  padding-right:8px;
+}
+
+#main a
+{
+  color:#91251c;
+  xfont-weight:bold;
+}
+
+#main a:link,
+#main a:visited
+{
+  text-decoration:none;
+}
+
+#main a:hover,
+#main a:active
+{
+  color:black;
+  text-decoration:underline;
+}
+
+
+/*IMAGES*/
+img
+{
+  border:0;
+}
+
+.photo
+{
+  border:1px solid black;
+}
+
+
+/*DATE PICKER*/
+.calendar .nav
+{
+  background:#006b3d no-repeat 100% 100%;
+  color:#fff;
+}
+
+.calendar thead .headrow
+{
+  /* Row <TR> containing navigation buttons */
+  background:#006b3d;
+  color:#fff;
+}
+
+.calendar tfoot .ttip
+{
+  /* Tooltip (status bar) cell <TD> */
+  background:#006b3d;
+  color:#fff;
+}
+
+img.datepicker
+{
+  border:0;
+  cursor:pointer;
+}
+
+
+/*SORTABLE TABLE*/
+.even
+{
+  background-color:#fff;
+ }
+
+.odd
+{
+  background-color:#f3f3f3;
+}
+
+table.sortabletable
+{
+  border:2px solid black;
+  padding:2px;
+  -moz-border-radius:4px;
+  -o-border-radius:4px;
+  -webkit-border-radius:4px;
+  border-radius:4px;
+  -moz-box-shadow:0 3px 6px rgba(0, 0, 0, 0.2);
+  -o-box-shadow:0 3px 6px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow:0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow:0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+/*FORMS */
+fieldset
+{
+  background-color:white;
+  border:2px solid #cf9337;
+  margin:2px 22px 2px 8px;
+  padding:11px;
+  border-radius:4px;
+  xxxbox-shadow:0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+button,
+input,
+select,
+textarea
+{
+  border:1px solid #556573;
+  font-family:'Roboto Slab', 'Nunito', 'Gadugi', sans-serif;
+  font-size:100%;
+  padding:1px;
+  border-radius:3px;
+}
+
+input.required,
+select.required,
+textarea.required
+{
+  background:#ffffda;
+  font-weight:bold;
+}
+
+.hidden
+{
+  display:none;
+}
+
+.readonly
+{
+  border-color:white;
+  border:0;
+}
+.inputlabel
+{
+  padding:1px;
+  text-align:right;
+}
+
+td.required, p.required
+{
+  font-weight:bold;
+}
+
+td.right
+{
+  text-align:right;
+}
+
+td.grey,
+.lightGrey
+{
+  color:#e0e0e0;
+}
+
+
+/*BUTTONS*/
+.pushbutton, button
+{
+  background-color:#91251c;
+  background-image:url(../Images/Over.png?v=2);
+  _background-image:none;
+  background-position:left center;
+  border-width:2px;
+  border-color:#91251c;
+  border-style:solid;
+  color:#f6f6f6;
+  font-weight:bold;
+  margin:3px 0;
+  padding:1px;
+  -moz-border-radius:3px;
+  -o-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  -moz-transition-property:all;
+  -o-transition-property:all;
+  -webkit-transition-property:all;
+  transition-property:all;
+  -moz-transition-duration:0.2s;
+  -o-transition-duration:0.2s;
+  -webkit-transition-duration:0.2s;
+  transition-duration:0.2s;
+  -moz-transition-timing-function:ease;
+  -o-transition-timing-function:ease;
+  -webkit-transition-timing-function:ease;
+  transition-timing-function:ease;
+}
+
+.pushbutton:hover,
+button:hover,
+.pushbutton:focus, 
+button:focus
+{
+  background-color:#556573;
+  border-color:#556573;
+  color:#f6f6f6;
+  cursor:pointer;
+}
+
+.pushbutton:active,
+button:active
+{
+  background-image:url(../Images/Active.png?v=2);
+  border-color:#006b3d;
+  color:white;
+}
+
+button
+{
+  margin:5px;
+  width:150px;
+}
+
+
+/*DISABLED FORMS*/
+.disabledform fieldset
+{
+  background-color:#f6f6f6;
+  border-color:white;
+  -moz-box-shadow:0 0 0 rgba(0, 0, 0, 0.2);
+  -o-box-shadow:0 0 0 rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow:0 0 0 rgba(0, 0, 0, 0.2);
+  box-shadow:0 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.disabledform fieldset .readonly
+{
+  background-color:#f6f6f6;
+  border-color:#f6f6f6;
+}
+
+.disabledform fieldset input,
+.disabledform fieldset input.required,
+.disabledform fieldset select,
+.disabledform fieldset select.required,
+.disabledform fieldset textarea,
+.disabledform fieldset textarea.required
+{
+  background-color:#f6f6f6;
+}
+
+input:disabled,
+input.sfdisabled
+{
+  background:white !important;
+  color:#ccc;
+}
+
+.disabledform #btnSubmit,
+.disabledform #btnCancel
+{
+  background-color:#f6f6f6;
+  border-color:white;
+}
+
+
+/*THICKBOX*/
+#TB_closeAjaxWindow, 
+#TB_title
+{
+  /* background-color:#1c3144 !important; */
+  background-color: red;
+  /*color:white;*/
+}
+
+#TB_closeAjaxWindow a
+{
+  /* color:#f6f6f6 !important; */
+  color: blue;
+}
+
+#TB_ajaxWindowTitle
+{
+  /* color:white !important; */
+  color: greenyellow;
+
+}
+
+#TB_ajaxContent #btnCancel,
+#TB_ajaxContent a.pushbutton
+{
+  display:none;
+}
+
+.printLinkInThickBox
+{
+  display:none;
+}
+
+#TB_ajaxContent .printLinkInThickBox
+{
+  display:inline;
+}
+
+
+/*DIVS FOR CHECKING AJAX COMPLETION*/
+#mainstatus,
+#extrastatus
+{
+  display:none;
+}
+
+
+/*SWEETITLES*/
+body div#toolTip
+{
+  background:#91251c !important;
+}
+
+
+/*IE PNG FIX (fix probs with partial transparency in IE6), note the * html targets just ie6 (causes minor probs with status bar in ie 7 when loading images using ajax)*/
+* html img
+{
+  behavior:url(../Include/ssIePngFix.htc);
+  margin:0;
+}
+
+
+/*MENU*/
+#nav
+{
+  margin-top:13px;
+}
+
+#nav a
+{
+  color:#006b3d;
+}
+
+#nav li li a
+{
+  color:#f38630;
+}
+
+#nav li li a:hover
+{
+  border:5px solid #006b3d;
+}
+
+#nav li
+{
+  border:1px solid #006b3d;
+}
+
+.module ul
+{
+  border-right:solid 1px #006b3d;
+}
+
+
+/*POPUP*/
+body.popup
+{
+  background-image:none;
+}
+
+html body.popup #wrapper,
+body.popup #wrapper
+{
+  background-image:none;
+}
+
+body.popup #content
+{
+  margin-left:0;
+}
+
+body.popup #sidebar
+{
+  display:none;
+}
+
+/*EXPAND AND COLLAPSE*/
+.hiddenInitially
+{
+  display:none;
+}
+
+.expand
+{
+  background-image:url(../Images/ssAdd.png?v=2);
+  _background-image:url(../Images/ssAdd.gif);
+  background-position:5px 0px !important;
+  background-repeat:no-repeat;
+  border:1px solid #f6f6f6;
+  cursor:pointer;
+  padding-left:32px;
+  border-radius:16px;
+}
+
+.collapse
+{
+  cursor:pointer;
+  background-image:url(../Images/ssSubtract.png?v=2);
+  _background-image:url(../Images/ssSubtract.gif);
+  background-position:5px 0px !important;
+  background-repeat:no-repeat;
+  border:1px solid #f6f6f6;
+  padding-left:32px;
+  border-radius:16px;
+}
+
+
+/*VALIDATION*/
+.validationerror
+{
+  background-color:darksalmon !important;
+  border:1px solid indianred;
+}
+
+
+/*TIP*/
+
+#JT_close_left,
+#JT_close_right
+{
+  background-color:#f38630  !important;
+  color:white  !important;
+}
+
+#JT
+{
+  border:2px solid black !important;
+}
+
+
+/*PSEUDO TABLES*/
+.endofpseudotable,
+.breakbetweensuperboxes,
+.endOfPseudoTable,
+.breakBetweenSuperBoxes
+{
+  clear:left;
+  height:0;
+  padding:0;
+}
+
+.table,
+.table div,
+.table div div
+{
+  margin:0;
+  padding:0;
+}
+
+.table div div
+{
+  border:1px solid transparent;
+  float:left;
+  height:16px;
+  padding:5px 5px 5px 5px;
+  text-align:right;
+}
+
+.table div
+{
+  float:left;
+}
+
+.table div div.th
+{
+  text-align:center;
+}
+
+.totals div
+{
+  font-weight:bold;
+  text-align:right;
+}
+
+.table div.firstcol, 
+.table div.firstCol
+{
+  border-left:2px solid transparent;
+}
+
+.table div.lastcol, 
+.table div.lastCol
+{
+  border-right:2px solid transparent;
+}
+
+.table div.firstrow, 
+.table div.firstRow
+{
+  border-top:2px solid transparent;
+}
+
+.table div.lastrow, 
+.table div.lastRow
+{
+  border-bottom:2px solid transparent;
+}
+
+.endOfPseudoTable
+{
+  clear:both;
+}
+
+/*RESPONSIVE TOP NAV*/
+#logo
+{
+  height:60px
+  width:162px
+}
+      
+.breakWhenSmall
+{
+  display:none;
+}
+
+#credentials
+{
+   color:white;
+   font-family: 'Cinzel', serif;
+   float:right;
+   height:45px;
+   text-align:right;
+}
+
+#logOut
+{
+  font-size:80%; 
+  font-family: 'Cinzel', serif;
+}
+
+#search
+{
+  float:right;
+  margin-right:6px;
+  margin-top:2px;
+}
+
+#searchIcon
+{
+  display:none;;
+}
+
+#menuIcon
+{
+  display:none;
+}
+
+#menuuu
+{
+  float:right;
+  margin-right:6px;
+  margin-top:2px;
+}
+
+#strSearch
+{
+  background: url(../Images/search-icon-md.png?v=2) no-repeat right white;;
+  background-size: 90% 90%;
+  font-size:160%;
+  height:30px;
+  width:300px;
+}
+
+#credentials,
+#search
+{
+  *position:relative; /*IE7 and below*/
+  *top:-60px; /*IE7 and below*/
+}
+
+#strSearch2
+{
+  background: url(../Images/search-icon-md.png?v=2) no-repeat right white;
+  font-size:160%;
+  height:30px;
+  margin:2px;
+  width:98%;
+}
+
+#topNavOne,
+#topNavTwo
+{
+  padding:4px;
+}
+
+#topNavSearch
+{
+  display:none;
+}
+
+#topNavSearch.shown
+{
+  display:block;
+}
+
+.module ul
+{
+  display:none;
+}
+
+#nav
+{
+  padding-left:0;
+}
+
+.module,
+.module div
+{
+  display:inline;
+}
+
+.diaryTable .module,
+.diaryTable .module div
+{
+  display:block;
+}
+
+.module div
+{
+  line-height:1.5;
+}
+
+#nav li div a
+{
+  color:white;
+  font-weight:normal;
+  font-size:110%;
+  padding-right:20px;
+  text-decoration:none;
+}
+
+#nav li div a:hover
+{
+  text-decoration:none;
+}
+
+#nav li ul a
+{
+  text-decoration:none;
+}
+
+#nav li
+{
+  border:0;
+}
+
+.module ul.shown
+{
+  display:block;
+  position:absolute;;
+  xtop:130px;
+  left:0;
+  z-index:100;
+  width:100%;
+  background:white;
+  margin-left:0
+  padding-left:0;
+  padding-bottom:10px;
+  padding-top:10px;
+}
+
+.module ul.shown li
+{
+  width:300px;
+  display:block;
+  float:left;
+  padding-bottom:6px;
+  padding-top:6px;
+}
+
+#nav li li a:hover
+{
+  border:0;
+}
+
+#last.module
+{
+  display:none;
+}
+
+#topnav a:hover  /*just overriding the #topnav rule in style.css*/
+{
+  text-decoration:underline;
+}
+
+.moduleprocess a:hover;
+{
+  text-decoration:underline;
+}
+
+/*TWO COL STUFF*/
+#RDTbottomofpage
+{
+  clear:both;
+}
+
+#main
+{
+  max-width:632px;
+  *width:632px;
+  width:auto;
+  margin:0 0 0 10px;
+}
+
+#content #main,
+.datamine #main
+{
+  max-width: none;
+  width:auto;
+}
+
+#leftpanel,
+#leftPanel
+{
+  float:left;
+  left:0px;
+  width:302px;
+  xborder:2px solid #5e5e5e;
+  padding:6px;
+  xborder-radius:3px;
+  xbox-shadow:0 3px 6px rgba(0, 0, 0, 0.2);
+  xbackground-color:white;
+}
+
+#rightpanel,
+#rightPanel
+{
+  float:right;
+  width:302px;
+  xmin-height:120px;
+  xborder:2px solid #5e5e5e;
+  padding:6px;
+  xborder-radius:3px;
+  xbox-shadow:0 3px 6px rgba(0, 0, 0, 0.2);
+  xbackground-color:white;
+}
+
+#leftpanel h1, 
+#leftpanel p,
+#rightpanel h1, 
+#rightpanel p
+{
+  padding:3px 5px;
+}
+
+#leftpanel h1, 
+#leftPanel h1, 
+#rightpanel h1,
+#rightPanel h1
+{
+  font-size: 145%;
+}
+
+#leftpanel h2, 
+#leftPanel h2, 
+#rightpanel h2, 
+#rightPanel h2
+{
+  margin: 0;
+  padding: 3px 5px;
+  border: none;
+  background-color: transparent;
+  xfont-size: 110%;
+  font-weight: bold;
+  min-width: 0;
+}
+
+
+/*DATA MINING*/
+
+.datamine #sidebar
+{
+  display:none;
+  float:none;
+}
+
+/*datamine is not particularly relevant in small screens, there is nothing to be gained from hiding teh side bar and letting it strectch right across)*/
+@media screen and (max-width: 880px)
+{
+  .datamine #sidebar
+  {
+    display:block;
+  }
+  
+  /*this next one has barely been tested it gives a bit more room at the bottom as tables got clippe doff in C.M.*/
+  #main
+  {
+    padding-bottom:90px;
+  }
+}
+
+
+.datamine #content
+{
+  margin-left:0;
+}
+
+/*RDT PAGES*/
+#top h3
+{
+  width:300px;
+}
+
+body.edit,
+body.new,
+body.viewall,
+body.datagrid,
+body.file,
+body.xxxdatamine,
+body.details,
+body.login
+{
+  background-image:url(../Images/Body.png?v=2);
+  background-position:-330px -60px;
+  background-repeat:repeat-y;
+  background:url(../Images/random.png?v=2) repeat 0px 0px,url(../Images/Body.png?v=2) repeat-y -330px -60px;
+  background-color:#f6f6f6;
+  margin:10px 0 0 5px;
+  padding:15px 0 0 10px;
+}
+
+
+
+body.details #wrapper
+{
+  clear:right;
+  width:100%;
+  margin-left:0;
+}
+
+body.details #content
+{
+  margin-left:10px;
+}
+
+.viewall a img,
+.viewallOutsideFrame a img
+{
+  padding-left:3px;
+}
+
+#RDTbottomofpage
+{
+  border:0px solid red;
+  color:#f6f6f6;
+  height:1px;
+  margin:0;
+  padding:0;
+  *margin-top:10px; /*IE7 and below*/
+}
+
+iframe
+{
+  background-color:#f6f6f6;
+}
+
+.RDTfileframe
+{
+  background-color:white;
+  border:0;
+}
+
+
+/*BOTH FRAME STYLES*/
+/*this overrides the fade effect in #content in the two iframe styles (it is only really visible around the edges but worth doing)*/
+body.classicstyle #content,
+body.sidebarstyle #content
+{
+  background-image:url(../Images/Body.png?v=2);
+  background-position:-330px -60px;
+  background-repeat:repeat-y;
+  background:url(../Images/random.png?v=2) repeat 0px 0px, url(../Images/Body.png?v=2) repeat-y -330px -60px;
+  background-color:#f6f6f6;
+}
+
+/*RDT FRAME SIDESTYLE*/
+.sidebarstyle #main
+{
+  margin:0;
+  padding-left:0;
+  padding-top:0;
+  width:99%;
+}
+
+.sidebarstyle iframe
+{
+  height:0px;
+  margin:0;
+  padding:0;
+  width:100%;
+}
+
+.sidebarstyle #footer,
+.sidebarstyle #header h1,
+.sidebarstyle #header h2
+{
+  display:none;
+}
+
+.sidebarstyle #frameset
+{
+  padding-right:0;
+}
+
+.sidebarstyle #header
+{
+  height: 0;
+  cursor:pointer;
+}
+
+body.sidebarstyle
+{
+  margin:0;
+  padding:0;
+  min-height:1000px;
+}
+
+.sidebarstyle  h1
+{
+  font-size:120%;
+}
+
+.sidebsarstyle #topnav  /*have sidebsarstyle mis-spelled on purpose?*/
+{
+  background: #f38630 url(../Images/topnav.jpg) left top repeat-x;
+  height:50px;
+  margin:0;
+  padding:5px;
+}
+
+.sidebarstyle #sidebar
+{
+  width:220px;
+  position:absolute;
+  left:0px;
+}
+
+.sidebarstyle .overlay100
+{
+  background-image:url(../Images/Body.png?v=2);
+  background-position:relative;
+  background-repeat:repeat-y;
+  background:url(../Images/random.png?v=2) repeat 0px 0px, url(../Images/Body.png?v=2) repeat-y -330px -60px;
+  background-color:#f6f6f6;
+  xxleft: 220px !important; /*220 is position of vertical line*/
+  xxtop: 145px !important;
+}
+
+
+/*RDT FRAME CLASSICSTYLE*/
+/*these first three clear out the default style of the content and wrapper, which are used in the regular page too.*/
+.classicstyle #footer,
+.classicstyle #topnav,
+.classicstyle #header h1,
+.classicstyle #header h2
+{
+  display:none;
+}
+
+.classicstyle #wrapper
+{
+  float:none;
+  width:100%;
+  margin:0px;
+}
+
+.classicstyle #content
+{
+  margin:0px;
+}
+
+.classicstyle #main
+{
+  float:auto;
+  margin:0;
+  max-width:auto;
+  padding-left:0;
+  padding-top:0;
+  width:99.5%; //for opera, which shows a horizontal scrollbar if set to 100%
+}
+
+.classicstyle iframe
+{
+  height:0px;
+  margin:0;
+  padding:0;
+  width:100%;
+}
+
+body.classicstyle
+{
+  background:  url(../Images/Body.png?v=2) -111px 0px repeat-y;
+  margin:0;
+  padding:0;
+}
+
+.classicstyle #header
+{
+  background: #f38630 url(../Images/Header.gif) left top repeat-x;
+  cursor:pointer;
+  height:60px;
+}
+
+.classicstyle #sidebar
+{
+  display:none;
+  float:none;
+}
+
+.classicstyle .overlay100
+{
+  background:  url(../Images/Body.png?v=2) repeat -111px -60px; 
+  left:0px !important;
+  top:60px !important;
+}
+
+.afterMenu
+{
+  display:none;
+}
+
+
+/*RESPONSIVE COLOURS*/
+@media screen and (max-width: 880px)
+{
+  #sidebar,
+  .sidebarstyle #sidebar
+  {
+    background-color:#f5f5f5;
+    border-top:2px solid #556573;
+  }
+}
+
+/*HELPER CLASSES*/
+.rounded5
+{
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+}
+
+.leftAlign
+{
+  text-align:left;
+}
+
+.rightAlign
+{
+  text-align:right;
+}
+
+.centerAlign
+{
+  text-align:center;
+}
+
+.hasSearch div#search
+{
+  display:none;
+}
+
+.imageContainer
+{
+  height:18px; 
+  width:18px;
+  display:block;
+  float:right;
+  clear:right;
+}
+
+.notBold
+{
+  font-weight:normal;
+}
+
+.clearBoth
+{
+  clear:both;
+}
+
+.clearLeft
+{
+  clear:left;
+}
+
+.clearRight
+{
+  clear:right;
+}
+
+.floatLeft
+{
+  float:left
+}
+
+.floatRight
+{
+  float:right
+}
+
+.hiddenWhenTablesAreTables
+{
+  display:none;
+}
+
+
+
+
+
+
+
+/*temp stuff to quickly remove the top menu*/
+
+xxx#topNavTwo #nav
+{
+  display:none;
+}
+
+xxx#menuIcon
+{
+  xdisplay:none !important;
+}
+
+x.NotInMyDiocese td, x.NotInMyDiocese td a
+{
+  color:gray;
+}
+
+
+
+#searchfieldset #strSearchCriteria:focus
+{
+  outline: none !important;
+  border-color: #91251c !important;
+}
+
+#Page1113 #userAccessNav span.Page1113,
+#Page1119 #userAccessNav span.Page1119,
+#Page1330 #userAccessNav span.Page1330
+{
+  background-color:#fff4b0;
+}
+
+#userAccessNav span
+{
+  border:1px solid #999;
+  padding:3px;
+  -moz-border-radius:3px;
+  -o-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+}
+
+.listBody .even,
+.listBody .odd
+{
+  background-color:transparent;
+}
+
+.tenPixelsRightMargin
+{
+  margin-right:10px;
+}
+
+/*St Padarns*/
+
+
+.table div div
+{
+  xborder:1px solid transparent;
+}
+  
+.table div.firstcol, 
+.table div.firstCol
+{
+  xborder-left:2px solid transparent;
+}
+  
+.table div.lastcol, 
+.table div.lastCol
+{
+  xborder-right:2px solid transparent;
+}
+
+.table div.firstrow, 
+.table div.firstRow
+{
+  xborder-top:2px solid transparent;
+}
+
+.table div.lastrow, 
+.table div.lastRow
+{
+  xborder-bottom:2px solid transparent;
+}
+
+body.institutions #comments,
+body.awards #comments,
+body.modules #comments,
+body.programOfStudys #comments,
+body.studentCourses #comments,
+body.students #comments,
+body.trainers #comments,
+body.trainerRoles #comments,
+body.trainerPositions #comments,
+body.superAssignments #comments,
+body.assignments #comments
+{
+  margin-bottom:9px;
+  margin-top:12px;
+}
+
+
+.table div#trAwardInstitutionID div.lastCol,
+.table div#trModuleInstitutionID div.lastCol,
+.table div#trProgramOfStudyAwardID div.lastCol,
+.table div#trProgramOfStudyModuleID div.lastCol,
+.table div#trStudentCourseProgramOfStudyID div.lastCol,
+.table div#trStudentCourseStudentID div.lastCol,
+.table div#trTrainerPositionTrainerID div.lastCol,
+.table div#trTrainerPositionTrainerRoleID div.lastCol,
+.table div#trTrainerPositionStudentCourseID div.lastCol,
+.table div#trSuperAssignmentModuleID div.lastCol,
+.table div#trAssignmentSuperAssignmentID div.lastCol,
+.table div#trAssignmentStudentCourseID div.lastCol
+{
+  text-align:left;
+}
+
+.sortabletable
+{
+  margin-bottom:10px;
+}
+
+
+#sidebarcontent span.notAHyperlink
+{
+  color:#333333;
+}
+
+#sidebarcontent .superceded
+{
+  opacity:0.2
+}
+
+/*St Padarns Modules*/
+
+#boxModulesTable small
+{
+  font-size:70%;
+  font-weight:normal;
+}
+
+.table div#trModuleName div.lastCol
+{
+  width:260px;
+}
+
+.table div#trModuleName div.lastCol input
+{
+  width:256px;
+}
+
+.table div#trModuleCode div.firstCol
+{
+  width:44px;
+}
+
+.table div#trModuleCode div.lastCol
+{
+  width:110px;
+}
+
+.table div#trModuleCode div.lastCol input
+{
+  width:106px;
+}
+
+.table div#trModuleEndDate div.firstCol
+{
+  width:105px;
+}
+
+.table div#trModuleStartDate div.lastCol,
+.table div#trModuleEndDate div.lastCol
+{
+  width:154px;
+}
+
+.table div#trModuleWeightingValue div.firstCol
+{
+  width:104px;
+}
+
+.table div#trModuleInstitutionID div.lastCol
+{
+  width:238px;
+}
+
+
+
+.table div#trModuleValue div.lastCol,
+.table div#trModuleWeightingValue div.lastCol
+{
+  width:60px;
+}
+
+.table div#trModuleValue div.lastCol input,
+.table div#trModuleWeightingValue div.lastCol input
+{
+  width:56px;
+}
+
+.table div#trModuleCourseOrDissID div.firstCol
+{
+  width:141px;
+}
+
+.table div#trModuleCourseOrDissID div.lastCol
+{
+  width:23px;
+}
+
+
+#listOfModulesToClone
+{
+  font-size:small;
+  list-style:square;
+}
+
+#listOfAssignmentsInModulePage,
+#listOfProgramOfStudysInModulePage
+{
+  font-size:medium;
+  list-style:square;
+}
+#boxStudentCourse #trStudentCourseDescription,
+#boxSuperAssignmentModular #trSuperAssignmentModuleID,
+#boxProgramOfStudyModular #trProgramOfStudyModuleID
+{
+  display:none;
+}
+
+#addAssignment,
+#addProgramOfStudy
+{
+  font-size:small;
+
+}
+
+
+
+
+/*St Padarns Student*/
+
+#listOfStudentCoursesInStudentPage
+{
+  font-size:medium;
+  list-style:square;
+}
+
+#addStudentCourse
+{
+  font-size:small;
+}
+
+
+#boxStudentCourseModular #trStudentCourseStudentID
+{
+  display:none;
+}
+
+#enuStudentCourseProgramOfStudyID
+{
+  width:428px;
+}
+
+.photo
+{
+  border:2px solid #006b3d;
+  border-radius:3px;
+}
+
+
+#boxTrainerPositionModular #trTrainerPositionDescription,
+#boxTrainerPositionModular #trTrainerPositionStudentCourseID
+{
+  display:none;
+}
+
+.liStudentOverview
+{
+  margin-bottom:15px;
+}
+
+#enuStudentGenderID
+{
+  width:123px;
+}
+
+#trStudentSpecialNeedID .lastCol
+{
+  text-align:left;
+  text-indent:8px;
+}
+
+.deleteTrainerPosition:hover img
+{
+  background:url(../Images/CrossTiny.png?v=2) no-repeat;
+}
+
+.liStudentOverview
+{
+   line-height:16px;
+}
+
+.liStudentOverview a
+{
+  opacity:0.1;
+}
+.liStudentOverview:hover a
+{
+  opacity:1;
+}
+
+#boxStudentCourseOverview
+{
+  display:none;
+}
+
+.datagridWidth100 input.datAssignmentSubmissionDate,
+input.datAssignmentExtensionDate
+{
+  position:relative;
+  top:-4px;
+  width:69px !important;
+}
+
+
+.tdAssignmentSuperAssignmentID
+{
+  overflow: hidden; text-overflow: ellipsis; 
+}
+.tdAssignmentSuperAssignmentID span
+{
+   font-size:80%;
+   line-height:12px;
+   overflow:hidden;
+   white-space: nowrap;
+   cursor:help;
+}
+
+#thAssignmentExtensionReason,
+#thAssignmentExtensionDate,
+#thAssignmentExtensionApprovedID
+{
+  display:none;
+}
+
+.tdAssignmentExtensionReason,
+.tdAssignmentExtensionDate,
+.tdAssignmentExtensionApprovedID 
+{
+  -moz-transition-property:all;
+  -o-transition-property:all;
+  -webkit-transition-property:all;
+  transition-property:all;
+  -moz-transition-duration:0.2s;
+  -o-transition-duration:0.2s;
+  -webkit-transition-duration:0.2s;
+  transition-duration:0.2s;
+  -moz-transition-timing-function:ease;
+  -o-transition-timing-function:ease;
+  -webkit-transition-timing-function:ease;
+  transition-timing-function:ease;
+}
+
+.table div div.zeroHeight
+{
+  height:0;
+  padding-bottom:0;
+  padding-top:0;
+  overflow:hidden;
+  opacity:0.2;
+}
+
+#boxAssignmentModular #trAssignmentStudentCourseID
+{
+  display:none;
+}
+
+#boxTrainerPositionModular #trTrainerPositionModuleID
+{
+  display:none;
+}
+
+#boxTrainerPositionModular #trTrainerPositionFCGID,
+#boxTrainerPositionModular #trTrainerPositionFTGID
+{
+  display:none;
+}
+
+
+
+#frmStudentCourseOverview #divSubmitRow
+{
+  display:none;
+}
+
+h3 small.fcgTrainer,
+h3 small.ftgTrainer
+{
+  font-weight:normal;
+  font-size:82%;
+}
+
+.photoWithoutLink
+{
+  border-color:black;
+}
+
+body.FCG #boxStudentAwards a
+{
+  font-size:110%;
+  position:relative;
+  top:-16px;
+}
+
+small.aFCGTutors
+{
+  margin-left:16px;
+}
+
+
+.aFCGTutors .deleteTrainerPosition
+{
+  font-size:120%
+}
+
+
+.studentAwardLevelInFCG:hover img.clearOut,
+.studentAwardLevelInFTG:hover img.clearOut
+{
+  background:url(../Images/CrossTiny.png?v=2) no-repeat;
+}
+
+#boxStudentAwardForFCG #trStudentAwardLevelStudentAwardID,
+#boxStudentAwardForFTG #trStudentAwardLevelStudentAwardID
+{
+  display:none;
+}
+
+#boxStudentAward #trStudentAwardStudentID
+{
+  display:none;
+}
+
+em.ab
+{
+  font-size:70%;
+}
+
+
+
+/*sloppy while I hack away at StudentCourseOverview.asp*/
+#boxAssignments .datagridWidth40  
+{
+  display:none;
+}
+
+#thAssignmentAttempt,
+#thAssignmentSupercededID
+{
+  display:none;
+}
+
+.addProgramOfStudy
+{
+  margin-left:100px;
+}
+
+.zeroHeight
+{
+  position:relative;
+  left:-1000px
+}
+
+.datAssignmentSubmissionDate
+{
+  font-size:93%;
+}
+
+.grey
+{
+  color:#ccc;
+}
+
+#passFailLegend
+{
+  border:1px solid #b8d87a;
+  border-radius:5px;
+  float:right;
+  font-size:x-small;
+  margin:6px;
+  margin-right:12px;
+  padding:6px;
+  
+  width:180px;
+  
+}
+
+body div#toolTip
+{
+  width:400px !important;
+}
+
+div#toolTip .alternateSweetTitleColour
+{
+  color:black
+}
+
+
+#thAssignmentFirstMark,
+#thAssignmentSecondMark,
+#thAssignmentAgreedMark,
+#thAssignmentExternalMark,
+#thAssignmentDissertationTitle
+{
+  display:none;
+}
+
+.datagridWidth150 input.intAssignmentFirstMark 
+{
+  width:50px !important;
+}
+
+.table div div.tdAssignmentFirstMark
+{
+  margin-left:49px;
+}
+
+
+
+.table div div.tdAssignmentFirstMark,
+.table div div.tdAssignmentSecondMark,
+.table div div.tdAssignmentAgreedMark,
+.table div div.tdAssignmentExternalMark
+{
+  display:none;
+  height:80px;
+}
+
+.masters .table div div.tdAssignmentFirstMark,
+.masters .table div div.tdAssignmentSecondMark,
+.masters .table div div.tdAssignmentAgreedMark,
+.masters .table div div.tdAssignmentExternalMark
+{
+  display:block;
+}
+
+
+
+.tdAssignmentFirstMark:before
+{
+  content: "1st mark";
+  font-size:60%;
+  padding-left:28px;
+}
+
+.tdAssignmentSecondMark:before
+{
+  content: "2nd mark";
+  font-size:60%;
+  padding-left:28px;
+}
+
+.tdAssignmentAgreedMark:before
+{
+  content: "Agreed mark";
+  font-size:60%;
+  xpadding-left:28px;
+}
+
+.tdAssignmentExternalMark:before
+{
+  content: "Ext'l mark";
+  font-size:60%;
+  padding-left:28px;
+}
+
+.strAssignmentDissertationTitle 
+{
+  font-style:italic;
+  position:relative;
+  top:-9px;
+  font-size:85%;
+  left:-123px;
+}
+
+
+.hideLoadingImage #loadingimage
+{
+  display:none;
+}
+
+.photo
+{
+  max-height:120px;
+}
+
+.photoWithoutLink
+{
+  max-height:50px;
+}
+
+ul li.notAttended
+{
+  color:#bbbbbb;
+}
+
+
+.table div#trModuleLevelID div.firstCol,
+.table div#trModuleCourseLevel div.firstCol
+{
+  width:66px;
+}
+
+.table div#trModuleLevelID div.lastCol,
+.table div#trModuleCourseLevel div.lastCol
+{
+  width:110px;
+}
+
+.table div#trModuleCourseLevel div.lastCol input
+{
+  width:106px;
+}
+
+
+.table div#trModuleVenue div.firstCol
+{
+  width:65px;
+}
+
+.table div#trModuleVenue div.lastCol
+{
+  width:235px;
+}
+
+.table div#trModuleVenue div.lastCol input
+{
+  width:231px;
+}
+
+.table div#trModuleInvoiceableID div.firstCol
+{
+  width:60px;
+}
+
+.table div#trModuleInvoiceableID div.lastCol
+{
+  width:25px;
+}
+
+.table div#trModuleCost div.firstCol
+{
+  width:60px;
+}
+
+.table div#trModuleCost div.lastCol
+{
+  width:54px;
+}
+
+.table div#trModuleCost div.lastCol input
+{
+  width:50px;
+}
+
+
+
+
+.isShortCourse #trModuleValue,
+.isShortCourse #trModuleWeightingValue,
+.isShortCourse #trModuleCourseOrDissID,
+.isShortCourse #trModuleLevelID,
+.isShortCourse #addAssignment
+{
+  display:none;
+}
+
+.isModule #trModuleCourseLevel,
+.isModule #trModuleInvoiceableID,
+.isModule #trModuleCost,
+.isModule #trModuleVenue,
+.isModule #trModuleIntendedAudience,
+.isModule #trModuleMaxAttendees
+{
+  display:none;
+}
+
+.table div#trCourseElsewhereDate div.lastCol
+{
+  text-align:left;
+}
+
+.h2StudentAwardDescription
+{
+  margin-bottom:0;
+}
+
+.smlStudentCourseNote
+{
+  margin-left:4px;
+  font-weight:normal;
+  font-size:80%;
+}
+
+.h2StudentAwardDescription a
+{
+  opacity:0.2;
+  font-size:70%;
+}
+
+.h2StudentAwardDescription:hover a
+{
+  opacity:1;
+}
+
+.threeQuartersWidthSuperbox
+{
+  width:406px;
+}
+
+body.markAssignments #main.masters .tdAssignmentDissertationTitle 
+{
+  position:relative;
+  top:-56px;
+  left:123px;
+}
+
+
+
+body.markAssignments .table div div.tdAssignmentFirstMark,
+body.markAssignments .table div div.tdAssignmentSecondMark,
+body.markAssignments .table div div.tdAssignmentAgreedMark,
+body.markAssignments .table div div.tdAssignmentExternalMark
+{
+  height:44px;
+}
+
+
+
+
+.table div#trModuleIntendedAudience div.lastCol
+{
+  width:242px;
+}
+
+.table div#trModuleIntendedAudience div.lastCol input
+{
+  width:238px;
+}
+
+.table div#trModuleMaxAttendees div.firstCol
+{
+  width:88px;
+}
+
+.table div#trModuleMaxAttendees div.lastCol
+{
+  width:54px;
+}
+
+.table div#trModuleMaxAttendees div.lastCol input
+{
+  width:50px;
+}
+
+.tdAssignmentStudentCourseID 
+{
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+.tdAssignmentStudentCourseID span
+{
+   font-size:80%;
+   line-height:12px;
+   overflow:hidden;
+   white-space: nowrap;
+   cursor:help;
+}
+
+
+#coursesElsewhereDetails,
+#shortCoursesDetails
+{
+  list-style:square;
+  margin-left:14px;
+}
+
+#enuSuperAssignmentModuleID
+{
+  width:384px;
+}
+
+.haddress
+{
+  background-image: url(../Icons/House.png?v=2);
+  _background-image: url(../Icons/House.gif);
+  background-repeat:no-repeat;
+  background-position:6px 4px;
+  padding-left:0;
+  text-indent:25px;
+}
+
+.adr span,
+.org span
+{
+  display:block
+}
+
+
+.hcontactdetails
+{
+  background-image: url(../Icons/Telephone.png?v=2);
+  _background-image: url(../Icons/Telephone.gif);
+  background-repeat:no-repeat;
+  background-position:6px 4px;
+  padding-left:0;
+  text-indent:25px;
+}
+
+.hroles
+{
+  background-image: url(../Icons/Roles.png?v=2);
+  background-repeat:no-repeat;
+  background-position:6px 8px;
+  padding-left:0;
+  text-indent:25px;
+}
+
+
+
+
+#clergy
+{
+  background-image: url(../Icons/Clergy.png?v=2);
+  _background-image: url(../Icons/ClergySmall.gif);
+}
+
+#headteacher
+{
+  background-image: url(../Icons/Headteacher.png?v=2);
+  _background-image: url(../Icons/HeadteacherSmall.gif);
+}
+
+#governor
+{
+  background-image: url(../Icons/User.png?v=2);
+  _background-image: url(../Icons/User.gif);
+}
+
+#schoolPositions,
+#governors,
+#schoolPositions
+{
+  text-indent:25px;
+}
+
+#addressandcontacts fieldset
+{
+  background-color:transparent;
+  border-color:transparent;
+}
+
+#leftPanel h2,
+#leftpanel h2,
+#rightPanel strong,
+#rightpanel strong
+{
+  vfont-weight:normal;
+  cfont-family: Calibri;
+  color:#556573;
+  cfont-size:16px;
+}
+
+h2#schoolPositions,
+h2#governors
+{
+  margin-bottom:6px;
+}
+
+h2#boxHeadteachers,
+h2#boxGovernors,
+h2#boxSchoolPositions,
+h2#boxActionSteps,
+h2#boxSchools,
+h2#boxTrustPositions
+{
+  text-indent: 25px;
+}
+
+li.odd,
+li.even
+{
+  background-color:transparent;
+}
+
+
+#ulGovernors,
+#ulTrustees
+{
+  padding-left:0px !important;
+}
+
+#localGoverningBody
+{
+  padding-left:0px !important;
+  margin-left:0px !important;
+  text-decoration:underline;
+}
+
+#macDescription
+{
+  line-height:30px;
+  text-decoration:underline;
+}
+
+select#enuExtraSchoolID
+{
+  width:458px;
+}
+
+#sidebarcontent small a
+{
+  position:relative;
+  top:-8px
+}
+
+#BoardOfGovs
+{
+  font-size: 11pt;
+}
+
+.schoolGovernors, .schoolGovernors td, .schoolGovernors th,
+.schoolTrustGovernors, .schoolTrustGovernors td, .schoolTrustGovernors th
+{
+  border: 1px solid #556573;
+  padding: 2px;
+  font-size: 90%;
+}
+
+#boxGovernors,
+#boxTrustPositions
+{
+  border-collapse: collapse;
+}
+
+
+#groupingGovernorAppointments.grouping h3,
+#groupingGovernorAppointments.grouping hr.hrGrouping
+{
+  display:none;
+}
+
+#boxGovernorApplicationForms hr
+{
+  display:none;
+}
+
+.extraLineHeight
+{
+  line-height:2;
+}
+
+.multiForm1050 fieldset
+{
+  border-color:transparent;
+  background-color:transparent;
+}
+
+.width300
+{
+  width:300px;
+}
+
+#nomineeDetailsWithinContactPicker
+{
+  background-color: #efeff8;
+  border: 1px solid #556573;
+  border-radius: 4px;
+  float: right;
+  font-size: small;
+  line-height: 1;
+  margin-top: 5px;
+  padding: 10px;
+  width: 300px;
+}
+
+.readOnlyDetails 
+{
+  border: 1px solid gray;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+#TB_ajaxContent fieldset
+{
+  border-color:transparent;
+}
+
+#results span
+{
+  color:#cf9337;
+}
+
+.shownOnlyInPrintBlock,
+.shownOnlyInPrintInline
+{
+  display:none;
+}
+
+.institutionDeleted
+{
+  text-decoration:line-through;
+}
+
+#radActionStepIndicatorID label
+{
+  border-radius:4px;
+  xcolor:white;
+  font-weight:bold;
+  padding:2px;
+}
+
+#radActionStepIndicatorID label:nth-of-type(1)
+{
+  border-width:5px;
+  border:3px dashed #91251c;
+}
+
+#radActionStepIndicatorID label:nth-of-type(2)
+{
+  border-width:5px;
+  border:3px dashed #cf9337;
+}
+
+#radActionStepIndicatorID label:nth-of-type(3)
+{
+  border-width:5px;
+  border:3px dashed #006b3d;
+}
+
+
+#superboxLeadershipIndicatorSuperbox #trActionStepDescription,
+#superboxGovernanceIndicatorSuperbox #trActionStepDescription,
+#superboxCatholicLifeIndicatorSuperbox #trActionStepDescription,
+#superboxStandardsIndicatorSuperbox #trActionStepDescription,
+#superboxFinanceIndicatorSuperbox #trActionStepDescription,
+#superboxPlacePlanningIndicatorSuperbox #trActionStepDescription
+{
+  margin-top:40px
+}
