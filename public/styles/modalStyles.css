@@ -43,6 +43,9 @@ dialog#TB_window {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  left: 0;
+  top: 0;
 }
 
 dialog#TB_window #TB_title {

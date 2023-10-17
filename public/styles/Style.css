@@ -624,21 +624,21 @@ input.sfdisabled
 #TB_closeAjaxWindow, 
 #TB_title
 {
-  /* background-color:#1c3144 !important; */
-  background-color: red;
-  /*color:white;*/
+  background-color:#1c3144 !important;
+  /* background-color: red; */
+  color:white;
 }
 
 #TB_closeAjaxWindow a
 {
-  /* color:#f6f6f6 !important; */
-  color: blue;
+  color:#f6f6f6 !important;
+  /* color: blue; */
 }
 
 #TB_ajaxWindowTitle
 {
-  /* color:white !important; */
-  color: greenyellow;
+  color:white !important;
+  /* color: greenyellow; */
 
 }
 
