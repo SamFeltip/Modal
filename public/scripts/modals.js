@@ -74,14 +74,23 @@ function createModalElement(strModalAjaxURL, strHeaderText)
 async function populateModalWithAjaxRequest (strModalAjaxURL)
 {
     var response = await fetch(strModalAjaxURL)
-    var modalAjaxBodyContent = await response.text();
+    var modal_content_from_request = await response.text();
     
-    var modalBody = document.getElementById('TB_ajaxContent')
+    var modal_body = document.getElementById('TB_ajaxContent')
     
     if(response.ok){
-        modalBody.innerHTML = modalAjaxBodyContent
+        modal_body.innerHTML = modal_content_from_request
+        
+        var body_as_dom = new DOMParser().parseFromString(modal_content_from_request, "text/xml");
+        var scripts_to_run = body_as_dom.getElementsByTagName('script')
+
+        for(var sCount=0 ; sCount !== scripts_to_run.length ; sCount++){
+            eval(scripts_to_run[sCount].innerHTML)
+        }
+        
+
     }else{
-        modalBody.innerHTML = 'could not find url to populate modal';
+        modal_body.innerHTML = 'could not find url to populate modal';
     }
 }
 
