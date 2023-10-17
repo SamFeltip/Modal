@@ -71,10 +71,15 @@ function createModalElement(strModalAjaxURL, strHeaderText)
 }
 
 
-async function populateModalWithAjaxRequest (modalBody, strModalAjaxURL)
+async function populateModalWithAjaxRequest (strModalAjaxURL)
 {
+    
+    var modalBody = document.getElementById('TB_ajaxContent')
+
     var response = await fetch(strModalAjaxURL)
     var modalAjaxBodyContent = await response.text();
+
+    modalAjaxBodyContent.id = "TB_ajaxContent"
 
     if(response.ok){
         modalBody.innerHTML = modalAjaxBodyContent
@@ -146,10 +151,8 @@ function ssNewThickbox(strModalAjaxURL, strHeaderText="")
     var modal = createModalElement(strModalAjaxURL, strHeaderText)
 
     modal.showModal();
-
-    var modalBody = document.getElementById('TB_ajaxContent')
     
-    populateModalWithAjaxRequest(modalBody, strModalAjaxURL)
+    populateModalWithAjaxRequest(strModalAjaxURL)
 }
 
 function showModalOnButtonPress(event)

@@ -26,10 +26,6 @@
 
 #TB_window {
 
-  position: fixed;
-  inset-inline-start: 0px;
-  /* inset-inline-end: 100px; */
-  
   padding: 0;
   
   background: #ffffff;
@@ -40,10 +36,43 @@
 
   animation: show 0.2s ease;
 
+  /* so that resizing occurs smoothly */
   transition: max-width 0.2s ease, max-height 0.2s ease;
 
   height: 90vh;
   width: 90vw;
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#TB_window #TB_title {
+  
+  display: flex;
+
+  padding: 0.5em;
+  background-color: #f38630;
+  color: white;
+  
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0;
+}
+
+#TB_window #TB_ajaxContent {
+  padding: 2px 15px 15px 15px;
+  
+  overflow-y: auto;
+  
+
+  height: 100%;
+
+} 
+
+#TB_window #TB_ajaxcontent div:first-of-type{
+  background-color: red;
 }
 
 #TB_window #TB_closeWindowButton:hover {
@@ -57,23 +86,6 @@
 
 #TB_window::backdrop {
   background: rgba(255, 255, 255, 0.6);
-}
-
-#TB_window #TB_ajaxContent {
-  padding: 2px 15px 15px 15px;
-  overflow-wrap: anywhere;
-} 
-
-#TB_window #TB_title {
-  padding: 0.5em;
-  background-color: #f38630;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 10px;
-  margin: 0;
-
 }
 
 #TB_window.closing::backdrop {
