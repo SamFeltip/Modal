@@ -22,7 +22,7 @@ function addClosingProceduresToModal(modal)
     })
 }
 
-function createModalElement(strHeaderText = "default modal header", strModalAjaxURL)
+function createModalElement(strModalAjaxURL, strHeaderText)
 {
     
     var {width, height} = getThickboxDimentionsFromUrl(strModalAjaxURL)
@@ -79,7 +79,7 @@ async function populateModalWithAjaxRequest (modalBody, strModalAjaxURL)
     if(response.ok){
         modalBody.innerHTML = modalAjaxBodyContent
     }else{
-        modalBody.innerHTML = '';
+        modalBody.innerHTML = 'could not find url to populate modal';
     }
 }
 
@@ -93,34 +93,63 @@ function getThickboxDimentionsFromUrl(strModalAjaxURL)
     }
 
     var url_params_starting_index = strModalAjaxURL.indexOf("?")
-    params_string = strModalAjaxURL.substring(url_params_starting_index)
+    var params_string = strModalAjaxURL.substring(url_params_starting_index + 1)
 
-    const searchParams = new URLSearchParams(params_string);
-    
+    var search_params = params_string.split("&");
+
     var width = default_thickbox_width;
     var height = default_thickbox_height;
 
-    if(searchParams.has('width')){
-        width = searchParams.get('width')
+    for(var pCount=0 ; pCount != search_params.length ; pCount++){
+        
+        var param_key_value_pair = search_params[pCount].split("=")
+
+        if(param_key_value_pair[0] === "width"){
+            width = param_key_value_pair[1]
+        }
+
+        if(param_key_value_pair[0] === "height"){
+            height = param_key_value_pair[1]
+        }
     }
 
-    if(searchParams.has('height')){
-        height = searchParams.get('height')
-    }
+    // const searchParams = new URLSearchParams(params_string);
+
+    // if(searchParams.has('width')){
+    //     width = searchParams.get('width')
+    // }
+
+    // if(searchParams.has('height')){
+    //     height = searchParams.get('height')
+    // }
 
     return {width, height}
+}
 
-    // console.log(searchParams.get('width'));
-    // console.log(searchParams.get('height'));
-
-    // width_position = strModalAjaxURL.indexOf("&width=")+1 || strModalAjaxURL.indexOf("?width=")+1
-    // console.log(width_position);
+function resizeThickbox(width, height)
+{
+    var existing_modal = document.getElementById("TB_window")
     
-    // return {width: default_width, height: default_height}
+    existing_modal.style.maxWidth = width + "px"
+    existing_modal.style.maxHeight = height + "px"
 
-    // if(strModalAjaxURL.contains("&width=") || strModalAjaxURL.contains("?width=")){
 
-    // }
+}
+
+function ssNewThickbox(strModalAjaxURL, strHeaderText="")
+{
+    var existing_modal = document.getElementById("TB_window")
+    if(existing_modal){
+        existing_modal.remove();
+    }
+
+    var modal = createModalElement(strModalAjaxURL, strHeaderText)
+
+    modal.showModal();
+
+    var modalBody = document.getElementById('TB_ajaxContent')
+    
+    populateModalWithAjaxRequest(modalBody, strModalAjaxURL)
 }
 
 function showModalOnButtonPress(event)
@@ -132,13 +161,8 @@ function showModalOnButtonPress(event)
     var strHeaderText = thickboxButton.getAttribute('title');
 
     var strModalAjaxURL = thickboxButton.getAttribute('href');
-    var modal = createModalElement(strHeaderText, strModalAjaxURL)
 
-    modal.showModal();
-    
-    var modalBody = document.getElementById('TB_ajaxContent')
-    
-    populateModalWithAjaxRequest(modalBody, strModalAjaxURL)
+    ssNewThickbox(strModalAjaxURL, strHeaderText)
 }
 
 

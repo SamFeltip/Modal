@@ -39,6 +39,11 @@
   border-radius: 3px;
 
   animation: show 0.2s ease;
+
+  transition: max-width 0.2s ease, max-height 0.2s ease;
+
+  height: 90vh;
+  width: 90vw;
 }
 
 #TB_window #TB_closeWindowButton:hover {
@@ -73,13 +78,12 @@
 
 #TB_window.closing::backdrop {
   background: none;
-  transition-duration: 0.2s;
+  transition: background 0.2s ease;
 }
 
 #TB_window.closing {
-  /* animation: close 2s ease; */
   transform: scale(0);
-  transition-duration: 0.2s;
+  transition: transform 0.2s ease;
 }
 
 

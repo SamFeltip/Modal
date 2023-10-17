@@ -21,14 +21,18 @@
 
   <section>
   
-    <h2>Auto generated Modal</h2>
-    <a class="thickbox" title="Hello, this is Modal 3!">Open Modal 3</a>
-    
     <h2>Auto generated AJAX Modal</h2>
+    <a class="thickbox" title="Hello, this is Modal 3!" href="/getAjaxData">Open Modal 3</a>
+    
+    <h2>Auto generated Modal with large AJAX body</h2>
     <a class="thickbox" title="Hello, this is Modal 4!" href="/information">Open Modal 4</a>
     
     <h2>Mini Modal</h2>
     <a class="thickbox" title="this is a <em>mini</em> Modal" href="/information?width=400&height=200">Open mini modal</a>
+    
+    <hr/>
+
+    <button onclick="ssNewThickbox('/getAjaxData?width=250&height=250')">Click to open a modal</button>
 
   </section>
 
@@ -43,10 +47,10 @@
 <!-- href should be href prop of <a> ✅-->
 <!-- in hyperlink there's a title instaed of data-modal-header ✅ -->
 <!-- .thickbox instead of .openModal✅ -->
-<!-- end of url should include height/width params which define the modal size (height and width)-->
+<!-- end of url should include height/width params which define the modal size (height and width) ✅ -->
 <!-- default height and width are 630x440 ✅ -->
 
-<!-- should be able to run ssThickbox(url) that will open a modal with the AJAX and widht and height from URL  -->
+<!-- should be able to run ssThickbox(url) that will open a modal with the AJAX and widht and height from URL  ✅-->
 <!-- give .body an id of #TB_ajaxContent -->
 <!-- get styles from http://sslib.co.uk/ssLib/Pages/Thickbox.asp -->
 

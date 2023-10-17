@@ -17,13 +17,7 @@ app.get('/information', (req, res) => {
 });
 
 app.get('/getAjaxData', (req, res) => {
-  res.send(`
-    <div>
-      <h2>Ajax request!!</h2>
-      <p>you wanted it, here's your data served!</p>
-      <script>console.log("something important!")</script>
-    </div>
-  `);
+  res.sendFile(path.join(__dirname, "public/ajax.html"))
 });
 
 
