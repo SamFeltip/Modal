@@ -73,14 +73,11 @@ function createModalElement(strModalAjaxURL, strHeaderText)
 
 async function populateModalWithAjaxRequest (strModalAjaxURL)
 {
-    
-    var modalBody = document.getElementById('TB_ajaxContent')
-
     var response = await fetch(strModalAjaxURL)
     var modalAjaxBodyContent = await response.text();
-
-    modalAjaxBodyContent.id = "TB_ajaxContent"
-
+    
+    var modalBody = document.getElementById('TB_ajaxContent')
+    
     if(response.ok){
         modalBody.innerHTML = modalAjaxBodyContent
     }else{

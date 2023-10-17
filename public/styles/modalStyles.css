@@ -71,10 +71,6 @@
 
 } 
 
-#TB_window #TB_ajaxcontent div:first-of-type{
-  background-color: red;
-}
-
 #TB_window #TB_closeWindowButton:hover {
   text-decoration: underline;
 }
@@ -85,6 +81,7 @@
 }
 
 #TB_window::backdrop {
+  transition: background 0.2s ease;
   background: rgba(255, 255, 255, 0.6);
 }
 
