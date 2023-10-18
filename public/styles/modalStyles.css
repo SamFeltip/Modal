@@ -81,10 +81,21 @@ dialog#TB_window:focus-visible {
   outline: none;
 }
 
+@keyframes reveal_modal_backdrop {
+  0% {
+    background: none;
+  }
+
+  100% {
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
 dialog#TB_window::backdrop {
-  transition: background 0.2s ease;
+  animation: reveal_modal_backdrop 0.2s ease;
   background: rgba(255, 255, 255, 0.6);
 }
+
 
 dialog#TB_window.closing::backdrop {
   background: none;
