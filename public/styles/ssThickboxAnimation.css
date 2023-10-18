@@ -73,6 +73,28 @@ dialog#TB_window.glide.closing {
 
 
 /* spin modal animation */
+@keyframes legacy-open-modal{
+  0% {
+    opacity: 0;
+  }
+}
+
+@keyframes legacy-close-modal {
+  100% {
+    opacity: 0;
+  }
+}
+
+dialog#TB_window.legacy[open] {
+  animation: legacy-open-modal 0.2s ease;
+}
+
+dialog#TB_window.legacy.closing {
+  animation: legacy-close-modal 0.2s ease;
+}
+
+
+/* spin modal animation */
 @keyframes spin-open-modal{
   0% {
     transform: rotate(180deg) scale(0); 

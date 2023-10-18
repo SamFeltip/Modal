@@ -23,6 +23,11 @@ function addCSSAnimationZoom(modal){
   modal.classList.add('zoom')
 }
 
+
+function addCSSAnimationLegacy(modal){
+  modal.classList.add('legacy')
+}
+
 function addAnimationToModal(modal, animation){
   
   switch(animation){
@@ -34,6 +39,9 @@ function addAnimationToModal(modal, animation){
       break
     case "Zoom":
       addCSSAnimationZoom(modal);
+      break
+    default:
+      addCSSAnimationLegacy(modal);
       break
   }
 }

@@ -168,7 +168,7 @@ function ssNewThickbox(thickbox_ajax_url, thickbox_header="", thickbox_animation
     addClosingProceduresToModal(modal, 200)
 
     // defined in ssThickboxAnimation
-    if(!(addAnimationToModal === undefined) && thickbox_animation_type){
+    if(!(addAnimationToModal === undefined)){
         addAnimationToModal(modal, thickbox_animation_type)
     }
 
@@ -199,6 +199,8 @@ function showModalOnButtonPress(event)
     if(getThickboxAnimationType !== undefined){
         thickbox_animation_type = getThickboxAnimationType(thickboxHyperlink);
     }
+
+    console.log("^", thickbox_animation_type);
 
     // run check animation function in thickboxAnimation.js
     // defineModalAnimation && defineModalAnimation(classList)
