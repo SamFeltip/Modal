@@ -1,9 +1,3 @@
-function addCSSAnimation(modal, animation_style){
-  animation_style = animation_style.toLowerCase()
-  modal.classList.add(animation_style)
-  return modal
-}
-
 function getThickboxAnimationType(thickboxHyperlink){
   var classList = thickboxHyperlink.classList
   var animation_class_prefix = 'tbAnim'
@@ -17,16 +11,19 @@ function getThickboxAnimationType(thickboxHyperlink){
   return ""
 }
 
+function addCSSAnimation(modal, animation_style){
+  animation_style = animation_style.toLowerCase()
+  modal.classList.add(animation_style)
+  return modal
+}
+
 function addAnimationToModal(modal, animation){
-  
-  console.log(animation);
   
   switch(animation){
     case "Spin":
     case "Glide":
     case "Zoom":
       modal = addCSSAnimation(modal, animation)
-    default:
   }
 
   return modal

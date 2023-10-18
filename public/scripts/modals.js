@@ -195,8 +195,6 @@ function showModalOnButtonPress(event)
         thickbox_animation_type = getThickboxAnimationType(thickboxHyperlink);
     }
 
-    console.log(thickbox_animation_type);
-
     // run check animation function in thickboxAnimation.js
     // defineModalAnimation && defineModalAnimation(classList)
 
