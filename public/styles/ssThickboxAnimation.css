@@ -19,7 +19,7 @@ dialog#TB_window::backdrop {
 
 /* close backdrop */
 dialog#TB_window.closing::backdrop {
-  animation: close-modal-backdrop 0.2s ease;
+  animation: close-modal-backdrop 0.2s ease forwards;
 }
 
 
@@ -86,7 +86,7 @@ dialog#TB_window.glide.closing {
 }
 
 dialog#TB_window.spin[open] {
-    animation: spin-open-modal 0.2s ease;
+  animation: spin-open-modal 0.2s ease;
 }
 
 dialog#TB_window.spin.closing {

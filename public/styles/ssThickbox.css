@@ -298,6 +298,9 @@ dialog#TB_window[open] {
 
   left: 0;
   top: 0;
+
+  width: 90vw;
+  height: 90vh;
 }
 
 dialog#TB_window #TB_ajaxContent {
@@ -310,7 +313,7 @@ dialog#TB_window:focus-visible {
 }
 
 dialog#TB_window::backdrop {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(230, 230, 218, 0.4);
 }
 
 dialog#TB_window a {

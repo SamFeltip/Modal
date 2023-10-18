@@ -1,14 +1,14 @@
 
 ### TODO
 
-- [x] include ssThickbox.css
-- [x] add generic `dialog#TB_...` to ssThickbox instead of my own file
-- [x] special animations (opening/closing modal) should be in `ssThickboxAnimation.css`
-- [x] double check js is animation agnostic
+- [] swipe to dismiss: either left swipe or right swipe (dismiss the correct way) will be constant for all styles of modal
+- [x] small screens: fill width of screen
+- [] see if you can work on the grow from link animation (as much like giene macOS)
+  animation:
+    scale window and move it towards link until invisible
+    (reverse on open)
+- [] thickbox without tbAnim will use 'tbAnimLegacy'
 
-- [x] give `<a>` a class of `.tbAnimBounce`
-
-- [x] make two animation types for openning (bounce and spin)
 
 ### doing animation with tbAnim
 

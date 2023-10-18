@@ -5,6 +5,7 @@ function addClosingProceduresToModal(modal, animationTimeMs=200)
         // this will only be true if you click on the modal's ::backdrop
         if (event.target === modal)
         {
+        
             modal.classList.add('closing');
             setTimeout(() => {
                 modal.remove()
@@ -33,8 +34,6 @@ function addClosingProceduresToModal(modal, animationTimeMs=200)
     })
 
     modal.classList.add("closeTB_windowapplied")
-
-    return modal
 }
 
 
@@ -166,11 +165,11 @@ function ssNewThickbox(thickbox_ajax_url, thickbox_header="", thickbox_animation
     
     document.body.appendChild(modal);
     
-    modal = addClosingProceduresToModal(modal, 200)
+    addClosingProceduresToModal(modal, 200)
 
     // defined in ssThickboxAnimation
     if(!(addAnimationToModal === undefined) && thickbox_animation_type){
-        modal = addAnimationToModal(modal, thickbox_animation_type)
+        addAnimationToModal(modal, thickbox_animation_type)
     }
 
     modal.showModal();
@@ -188,6 +187,12 @@ function showModalOnButtonPress(event)
 
     var thickbox_ajax_url = thickboxHyperlink.getAttribute('href');
     
+
+    thickbox_ajax_url = thickbox_ajax_url + "&blnAjax=Yes"
+    //replace spaces with %20 for IE7 (and maybe others)
+    thickbox_ajax_url=thickbox_ajax_url.replace(/ /gi,"%20")
+    
+
     var thickbox_animation_type = ""
     
     // defined in ssThickboxAnimate
@@ -209,6 +214,7 @@ function initialiseTB_windowOpenningProcedures()
     for (var ombCount = 0; ombCount < thickboxButtons.length; ombCount++)
     {
         // ssHasClass
+        // add class thickboxapplied not openTB...
         if(!thickboxButtons[ombCount].classList.contains('openTB_windowapplied'))
         {
             thickboxButtons[ombCount].addEventListener('click', showModalOnButtonPress)

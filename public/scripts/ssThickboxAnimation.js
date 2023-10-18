@@ -7,24 +7,33 @@ function getThickboxAnimationType(thickboxHyperlink){
         return classList[cCount].substring(animation_class_prefix.length)
       }
   }
-
-  return ""
 }
 
-function addCSSAnimation(modal, animation_style){
-  animation_style = animation_style.toLowerCase()
-  modal.classList.add(animation_style)
-  return modal
+
+
+function addCSSAnimationSpin(modal){
+  modal.classList.add('spin')
+}
+
+function addCSSAnimationGlide(modal){
+  modal.classList.add('glide')
+}
+
+function addCSSAnimationZoom(modal){
+  modal.classList.add('zoom')
 }
 
 function addAnimationToModal(modal, animation){
   
   switch(animation){
     case "Spin":
+      addCSSAnimationSpin(modal);
+      break
     case "Glide":
+      addCSSAnimationGlide(modal);
+      break
     case "Zoom":
-      modal = addCSSAnimation(modal, animation)
+      addCSSAnimationZoom(modal);
+      break
   }
-
-  return modal
 }
