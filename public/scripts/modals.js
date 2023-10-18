@@ -1,6 +1,6 @@
 function addClosingProceduresToModal(modal)
 {
-    modal.addEventListener('click', function (event){
+    modal.addEventListener('click', function (event) {
         // Check if event.target (the thing being clicked) was the modal 
         // this will only be true if you click on the modal's ::backdrop
         if (event.target === modal)
@@ -12,9 +12,20 @@ function addClosingProceduresToModal(modal)
         }
     })
 
+    modal.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            
+            modal.classList.add('closing');
+            setTimeout(() => {
+                modal.remove()
+            }, 200)
+        }
+    });
+
     var TB_closeWindowButtonButton = document.getElementById("TB_closeWindowButton")
 
-    TB_closeWindowButtonButton.addEventListener('click',  function(){
+    TB_closeWindowButtonButton.addEventListener('click',  function () {
         modal.classList.add('closing');
         setTimeout(() => {
             modal.remove()

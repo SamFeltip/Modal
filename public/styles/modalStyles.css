@@ -22,7 +22,7 @@
   }
 }
 
-dialog#TB_window {
+dialog#TB_window[open] {
 
   padding: 0;
   
