@@ -8,37 +8,3 @@
   text-decoration: underline;
   cursor: pointer;
 }
-
-
-dialog#TB_window[open] {
-
-  padding: 0;
-
-  /* so that resizing occurs smoothly */
-  transition: max-width 0.2s ease, max-height 0.2s ease;
-
-  display: flex;
-  flex-direction: column;
-
-  left: 0;
-  top: 0;
-}
-
-dialog#TB_window #TB_ajaxContent {
-  height: 100%;
-} 
-
-/* reset default behaviour created by <a> */
-dialog#TB_window:focus-visible {
-  outline: none;
-}
-
-
-dialog#TB_window::backdrop {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-
-dialog#TB_window a {
-  cursor: pointer;
-}
