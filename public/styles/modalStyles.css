@@ -13,20 +13,10 @@
 dialog#TB_window[open] {
 
   padding: 0;
-  
-  background: #ffffff;
-  
-  /* color: #000000; */
-  border: 1px solid #716D67;
-  border-radius: 3px;
 
   /* so that resizing occurs smoothly */
   transition: max-width 0.2s ease, max-height 0.2s ease;
 
-  height: 90vh;
-  width: 90vw;
-
-  overflow: hidden;
   display: flex;
   flex-direction: column;
 
@@ -34,33 +24,9 @@ dialog#TB_window[open] {
   top: 0;
 }
 
-dialog#TB_window #TB_title {
-  
-  display: flex;
-
-  padding: 0.5em;
-  /* background-color: #f38630; */
-  /* color: white; */
-  
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 10px;
-  margin: 0;
-}
-
 dialog#TB_window #TB_ajaxContent {
-  padding: 2px 15px 15px 15px;
-  
-  overflow-y: auto;
-  
-
   height: 100%;
-
 } 
-
-dialog#TB_window #TB_closeWindowButton:hover {
-  text-decoration: underline;
-}
 
 /* reset default behaviour created by <a> */
 dialog#TB_window:focus-visible {
@@ -73,6 +39,6 @@ dialog#TB_window::backdrop {
 }
 
 
-dialog#TB_window #TB_closeWindowButton {
+dialog#TB_window a {
   cursor: pointer;
 }
