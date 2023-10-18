@@ -8,7 +8,7 @@
 
 - [x] give `<a>` a class of `.tbAnimBounce`
 
-- make two animation types for openning (bounce and spin)
+- [x] make two animation types for openning (bounce and spin)
 
 ### doing animation with tbAnim
 
