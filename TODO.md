@@ -7,7 +7,7 @@
   animation:
     scale window and move it towards link until invisible
     (reverse on open)
-- [] thickbox without tbAnim will use 'tbAnimLegacy'
+- [x] thickbox without tbAnim will use 'legacy' animation
 
 
 ### doing animation with tbAnim
