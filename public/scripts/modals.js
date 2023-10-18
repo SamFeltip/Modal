@@ -196,9 +196,6 @@ function showModalOnButtonPress(event) {
   //replace spaces with %20 for IE7 (and maybe others)
   thickbox_ajax_url = thickbox_ajax_url.replace(/ /gi, "%20")
 
-  // run check animation function in thickboxAnimation.js
-  // defineModalAnimation && defineModalAnimation(classList)
-
   ssNewThickbox(thickbox_ajax_url, thickboxHyperlink)
 }
 
