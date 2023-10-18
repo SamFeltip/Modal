@@ -9,16 +9,40 @@
   cursor: pointer;
 }
 
-@keyframes show{
+@keyframes spin-open-modal{
 
   0% {
     transform: rotate(0deg) scale(0); 
-    
   }
 
   100% { 
-    position: fixed;
     transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes glide-open-modal {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-open-modal {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  80% {
+    transform: translateY(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
 
@@ -32,7 +56,7 @@ dialog#TB_window[open] {
   border: 1px solid #716D67;
   border-radius: 3px;
 
-  animation: show 0.2s ease;
+  animation: bounce-open-modal 0.2s ease;
 
   /* so that resizing occurs smoothly */
   transition: max-width 0.2s ease, max-height 0.2s ease;
@@ -81,10 +105,21 @@ dialog#TB_window:focus-visible {
   outline: none;
 }
 
+@keyframes reveal_modal_backdrop {
+  0% {
+    background: none;
+  }
+
+  100% {
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
 dialog#TB_window::backdrop {
-  transition: background 0.2s ease;
+  animation: reveal_modal_backdrop 0.2s ease;
   background: rgba(255, 255, 255, 0.6);
 }
+
 
 dialog#TB_window.closing::backdrop {
   background: none;
@@ -97,10 +132,6 @@ dialog#TB_window.closing {
 }
 
 
-
 dialog#TB_window #TB_closeWindowButton {
   cursor: pointer;
 }
-
-
-/* optional: while we wait for ajax, put a loading spinner in the modal body */
