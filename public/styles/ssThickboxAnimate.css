@@ -1,0 +1,84 @@
+@keyframes spin-open-modal{
+
+  0% {
+    transform: rotate(0deg) scale(0); 
+  }
+
+  100% { 
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes zoom-open-modal {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-open-modal {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  80% {
+    transform: translateY(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+/* close-modal animations */
+@keyframes ease-close-modal {
+  100% {
+    transform: scale(0); 
+  }
+}
+
+/* open-modal-backdrop animations */
+
+@keyframes ease-open-modal-backdrop {
+  0% {
+    background: none;
+  }
+
+  100% {
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* close-modal-backdrop animations */
+@keyframes ease-close-modal-backdrop {
+  100% {
+    background: none;
+  }
+}
+
+
+
+/* open modal */
+dialog#TB_window[open] {
+  animation: spin-open-modal 0.2s ease;
+}
+
+/* close modal */
+dialog#TB_window.closing {
+  animation: ease-close-modal 0.2s ease;
+}
+
+/* open backdrop */
+dialog#TB_window::backdrop {
+  animation: ease-open-modal-backdrop 0.2s ease;
+}
+
+/* close backdrop */
+dialog#TB_window.closing::backdrop {
+  animation: ease-close-modal-backdrop 0.2s ease;
+}
