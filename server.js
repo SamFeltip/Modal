@@ -21,6 +21,11 @@ app.get('/getAjaxData', (req, res) => {
 });
 
 
+app.get('/lamp', (req, res) => {
+  res.sendFile(path.join(__dirname, "public/genie.html"))
+});
+
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

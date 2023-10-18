@@ -1,5 +1,10 @@
 function getThickboxAnimationType(thickboxHyperlink){
-  var classList = thickboxHyperlink.classList
+  
+  var classList = []
+  if(thickboxHyperlink){
+    classList = thickboxHyperlink.classList
+  }
+  
   var animation_class_prefix = 'tbAnim'
   for(var cCount = 0 ; cCount !== classList.length ; cCount++){
       
@@ -23,12 +28,29 @@ function addCSSAnimationZoom(modal){
   modal.classList.add('zoom')
 }
 
+function addCSSAnimationLamp(modal, thickboxHyperlink){
+
+  var { x, y, width, height} = thickboxHyperlink.getBoundingClientRect()
+
+  var starting_position_x = x + width/2
+  var starting_position_y = y - height/2
+
+  document.documentElement.style.setProperty('--starting-x', starting_position_x + "px")
+  document.documentElement.style.setProperty('--starting-y', starting_position_y + "px")
+
+
+  // console.log(document.documentElement.style.getPropertyValue('--starting-y'));
+  modal.classList.add('lamp')
+}
+
 
 function addCSSAnimationLegacy(modal){
   modal.classList.add('legacy')
 }
 
-function addAnimationToModal(modal, animation){
+function addAnimationToModal(modal, thickboxHyperlink){
+  
+  var animation = getThickboxAnimationType(thickboxHyperlink)
   
   switch(animation){
     case "Spin":
@@ -40,6 +62,9 @@ function addAnimationToModal(modal, animation){
     case "Zoom":
       addCSSAnimationZoom(modal);
       break
+      case "Lamp":
+        addCSSAnimationLamp(modal, thickboxHyperlink);
+        break
     default:
       addCSSAnimationLegacy(modal);
       break

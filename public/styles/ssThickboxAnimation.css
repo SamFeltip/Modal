@@ -114,3 +114,42 @@ dialog#TB_window.spin[open] {
 dialog#TB_window.spin.closing {
   animation: spin-close-modal 0.2s ease;
 }
+
+
+
+/* spin modal animation */
+@keyframes lamp-open-modal{
+  0% {
+    top: 0;
+    left: 0;
+    transform: translate(
+      calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y))
+      ) scale(0); 
+  }
+}
+
+@keyframes lamp-close-modal {
+  100% {
+    top: 0;
+    left: 0;
+    transform: translate(
+      calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y))
+      ) scale(0); 
+
+  }
+}
+
+dialog#TB_window.lamp[open] {
+  margin: 0;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+
+  animation: lamp-open-modal 0.2s ease;
+}
+
+dialog#TB_window.lamp.closing {
+  margin: 0;
+  animation: lamp-close-modal 0.2s ease;
+}

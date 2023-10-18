@@ -34,3 +34,54 @@ nav ul {
   margin-block-end: 0;
   padding-inline-start: 1em;
 }
+
+
+
+.flex {display: flex} 
+.flex-row {
+  flex-direction: row;
+} 
+.justify-between {
+  justify-content: space-between;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+
+@keyframes shake {
+
+  1% {
+    rotate: 0deg;
+  }
+  2% {
+    transform: translate(0,-5px);
+    rotate: 0deg;
+  }
+
+  3% {
+    transform: translate(2px, -5px);
+    rotate: 10deg;
+  }
+
+  4% {
+    transform: translate(-2px, -5px);
+    rotate: -10deg;
+  }
+
+  5% {
+    transform: translate(0px, -5px);
+    rotate: 0deg;
+  }
+
+
+  6% {
+    transform: translate(0px, 0px);
+    rotate: 0deg;
+  }
+}
+
+.lamp:hover {
+  animation: shake 5s linear infinite;
+}
