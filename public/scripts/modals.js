@@ -1,4 +1,4 @@
-function addClosingProceduresToModal(modal)
+function addClosingProceduresToModal(modal, animationTimeMs=200)
 {
     modal.addEventListener('click', function (event) {
         // Check if event.target (the thing being clicked) was the modal 
@@ -8,7 +8,7 @@ function addClosingProceduresToModal(modal)
             modal.classList.add('closing');
             setTimeout(() => {
                 modal.remove()
-            }, 200)
+            }, animationTimeMs)
         }
     })
 
@@ -19,7 +19,7 @@ function addClosingProceduresToModal(modal)
             modal.classList.add('closing');
             setTimeout(() => {
                 modal.remove()
-            }, 200)
+            }, animationTimeMs)
         }
     });
 
@@ -29,8 +29,12 @@ function addClosingProceduresToModal(modal)
         modal.classList.add('closing');
         setTimeout(() => {
             modal.remove()
-        }, 200)
+        }, animationTimeMs)
     })
+
+    modal.classList.add("closeTB_windowapplied")
+
+    return modal
 }
 
 
@@ -64,36 +68,26 @@ function getThickboxDimentionsFromUrl(strModalAjaxURL)
         }
     }
 
-    // const searchParams = new URLSearchParams(params_string);
-
-    // if(searchParams.has('width')){
-    //     width = searchParams.get('width')
-    // }
-
-    // if(searchParams.has('height')){
-    //     height = searchParams.get('height')
-    // }
-
     return {width, height}
 }
 
-function createModalElement(strModalAjaxURL, strHeaderText)
+function createModalElement(thickbox_ajax_url, thickbox_header)
 {
     
-    var {width, height} = getThickboxDimentionsFromUrl(strModalAjaxURL)
+    var {width, height} = getThickboxDimentionsFromUrl(thickbox_ajax_url)
 
-    var dialog = document.createElement('dialog');
-    dialog.id = "TB_window";
+    var modal = document.createElement('dialog');
+    modal.id = "TB_window";
 
-    dialog.style.maxWidth = width + "px"
-    dialog.style.maxHeight = height + "px"
+    modal.style.maxWidth = width + "px"
+    modal.style.maxHeight = height + "px"
 
     var headerElement = document.createElement('div');
     headerElement.id = 'TB_title';
 
     var headerText = document.createElement('div');
     headerText.id = 'TB_ajaxWindowTitle';
-    headerText.innerHTML = strHeaderText;
+    headerText.innerHTML = thickbox_header;
 
     
 
@@ -120,39 +114,33 @@ function createModalElement(strModalAjaxURL, strHeaderText)
     modalBody.appendChild(loadingImg);
 
     // Add the header and body to the dialog
-    dialog.appendChild(headerElement);
-    dialog.appendChild(modalBody);
+    modal.appendChild(headerElement);
+    modal.appendChild(modalBody);
 
-    // Add the dialog to the body of the HTML document
-    document.body.appendChild(dialog);
-
-    addClosingProceduresToModal(dialog)
-    dialog.classList.add("TB_windowapplied")
-
-    return dialog
+    return modal
 }
 
 
-async function populateModalWithAjaxRequest (strModalAjaxURL)
+async function populateModalBodyWithAjaxRequest (strModalAjaxURL)
 {
     var response = await fetch(strModalAjaxURL)
     var modal_content_from_request = await response.text();
     
-    var modal_body = document.getElementById('TB_ajaxContent')
+    var modalBody = document.getElementById('TB_ajaxContent')
     
     if(response.ok){
-        modal_body.innerHTML = modal_content_from_request
+        modalBody.innerHTML = modal_content_from_request
         
-        var body_as_dom = new DOMParser().parseFromString(modal_content_from_request, "text/xml");
-        var scripts_to_run = body_as_dom.getElementsByTagName('script')
+        var bodyAsDom = new DOMParser().parseFromString(modal_content_from_request, "text/xml");
+        var scriptsToRun = bodyAsDom.getElementsByTagName('script')
 
-        for(var sCount=0 ; sCount !== scripts_to_run.length ; sCount++){
-            eval(scripts_to_run[sCount].innerHTML)
+        for(var sCount=0 ; sCount !== scriptsToRun.length ; sCount++){
+            eval(scriptsToRun[sCount].innerHTML)
         }
         
 
     }else{
-        modal_body.innerHTML = 'could not find url to populate modal';
+        modalBody.innerHTML = 'could not find url to populate modal';
     }
 }
 
@@ -167,19 +155,26 @@ function resizeThickbox(width, height)
 
 }
 
-
-function ssNewThickbox(strModalAjaxURL, strHeaderText="")
+function ssNewThickbox(thickbox_ajax_url, thickbox_header="", thickbox_animation_type="")
 {
-    var existing_modal = document.getElementById("TB_window")
-    if(existing_modal){
-        existing_modal.remove();
+    var existingModal = document.getElementById("TB_window")
+    if(existingModal){
+        existingModal.remove();
+    }
+    
+    var modal = createModalElement(thickbox_ajax_url, thickbox_header)
+    
+    document.body.appendChild(modal);
+    
+    modal = addClosingProceduresToModal(modal, 200)
+
+    // defined in ssThickboxAnimation
+    if(!(addAnimationToModal === undefined) && thickbox_animation_type){
+        modal = addAnimationToModal(modal, thickbox_animation_type)
     }
 
-    var modal = createModalElement(strModalAjaxURL, strHeaderText)
-
     modal.showModal();
-    
-    populateModalWithAjaxRequest(strModalAjaxURL)
+    populateModalBodyWithAjaxRequest(thickbox_ajax_url)
 }
 
 
@@ -188,15 +183,24 @@ function showModalOnButtonPress(event)
     // stop <a> from redirecting to [href]
     event.preventDefault();
 
-    var thickboxButton = event.target
-    var strHeaderText = thickboxButton.getAttribute('title');
+    var thickboxHyperlink = event.target
+    var thickbox_header = thickboxHyperlink.getAttribute('title');
 
-    var strModalAjaxURL = thickboxButton.getAttribute('href');
+    var thickbox_ajax_url = thickboxHyperlink.getAttribute('href');
     
+    var thickbox_animation_type = ""
+    
+    // defined in ssThickboxAnimate
+    if(getThickboxAnimationType !== undefined){
+        thickbox_animation_type = getThickboxAnimationType(thickboxHyperlink);
+    }
+
+    console.log(thickbox_animation_type);
+
     // run check animation function in thickboxAnimation.js
     // defineModalAnimation && defineModalAnimation(classList)
 
-    ssNewThickbox(strModalAjaxURL, strHeaderText)
+    ssNewThickbox(thickbox_ajax_url, thickbox_header, thickbox_animation_type)
 }
 
 
