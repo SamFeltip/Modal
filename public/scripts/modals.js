@@ -1,9 +1,10 @@
 function addClosingProceduresToModal(modal, animationTimeMs = 200) {
-  modal.addEventListener('click', function (event) {
+  
+  modal.addEventListener('mouseup', function (event) {
     // Check if event.target (the thing being clicked) was the modal 
     // this will only be true if you click on the modal's ::backdrop
+  
     if (event.target === modal) {
-
       modal.classList.add('closing');
       setTimeout(() => {
         modal.remove()
@@ -145,7 +146,87 @@ function resizeThickbox(width, height) {
   existing_modal.style.maxWidth = width + "px"
   existing_modal.style.maxHeight = height + "px"
 
+}
 
+function addDragableToModal(modal){
+
+  var mouseDown = false;
+
+  // position of mouse on modal
+  var mouseInModalX = 0;
+  var mouseInModalY = 0;
+
+  var startingMousePositionX = 0;
+
+  function saveMouseDownPosition(mouseX, mouseY){
+
+    mouseDown = true
+    var modalDimensions = modal.getBoundingClientRect()
+
+    mouseInModalX = mouseX - modalDimensions.x
+    mouseInModalY = mouseY - modalDimensions.y
+
+    startingMousePositionX = mouseX;
+  }
+
+  function dragModalWithAnimation(mouseX, mouseY){
+
+    if(mouseDown){
+      
+      var translatePositionX = mouseX - mouseInModalX 
+      var translatePositionY = mouseY - mouseInModalY
+      
+      console.log({mouseInModalX, mouseX});
+
+      console.log({translatePositionX});
+
+      var distance_window_dragged = startingMousePositionX - mouseX
+      
+
+      var scale_amount = Math.pow(0.99, Math.max(0,Math.abs(distance_window_dragged) - 80))
+      var rotation_amount = distance_window_dragged * -1/20
+
+      modal.style.margin = 0
+      modal.style.top = translatePositionY + "px"
+      modal.style.left = translatePositionX + "px"
+      
+      modal.style.transform = "scale(" + scale_amount + ") rotate(" +rotation_amount+ "deg)"
+    }
+  }
+
+  function releaseModalFromDrag(mouseX, mouseY){
+  
+    mouseDown = false
+
+    var distance_dragged = Math.abs(startingMousePositionX - mouseX)
+
+    if(modal === document.elementFromPoint(mouseX, mouseY) && distance_dragged > 50){
+        modal.classList.add('closing-swipe');
+        
+        setTimeout(() => {
+          modal.remove()
+        }, 200)
+
+    }else {
+      modal.style.top = "";
+      modal.style.left = "";
+      modal.style.transform = "";
+      modal.style.margin = "";
+    }
+    
+  }
+
+  var tbTitle = document.getElementById('TB_title')
+
+  // touch screens need to use the title of the thickbox to swipe away instead of the entire modal
+  tbTitle.addEventListener('touchstart', function (event) { saveMouseDownPosition(event.touches[0].pageX, event.touches[0].pageY) });
+  tbTitle.addEventListener('touchmove',  function (event) { dragModalWithAnimation(event.touches[0].pageX, event.touches[0].pageY)});
+  tbTitle.addEventListener('touchend', function (event) { releaseModalFromDrag(event.changedTouches[0].pageX, event.changedTouches[0].pageY) });
+
+
+  modal.addEventListener("mousedown", function (event) {saveMouseDownPosition(event.pageX, event.pageY)})
+  modal.addEventListener("mousemove", function (event) {dragModalWithAnimation(event.pageX, event.pageY)}, false);
+  modal.addEventListener("mouseup", function (event) {releaseModalFromDrag(event.pageX, event.pageY)})
 }
 
 function ssNewThickbox(thickbox_ajax_url, thickboxHyperlink=null) {
@@ -175,6 +256,9 @@ function ssNewThickbox(thickbox_ajax_url, thickboxHyperlink=null) {
 
   modal.showModal();
   populateModalBodyWithAjaxRequest(thickbox_ajax_url)
+
+  addDragableToModal(modal)
+
 }
 
 

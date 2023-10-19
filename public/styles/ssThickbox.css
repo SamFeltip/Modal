@@ -296,11 +296,11 @@ dialog#TB_window[open] {
   display: flex;
   flex-direction: column;
 
-  left: 0;
   top: 0;
+  left: 0;
 
-  width: 90vw;
-  height: 90vh;
+  height: 90%;
+  width: 90%;
 }
 
 dialog#TB_window #TB_ajaxContent {
@@ -318,4 +318,12 @@ dialog#TB_window::backdrop {
 
 dialog#TB_window a {
   cursor: pointer;
+}
+
+dialog#TB_window #TB_title {
+  cursor: grab;
+}
+
+dialog#TB_window #TB_title:active {
+  cursor: grabbing;
 }

@@ -83,5 +83,5 @@ nav ul {
 }
 
 .lamp:hover {
-  animation: shake 5s linear infinite;
+  animation: shake 5s linear infinite 1s;
 }

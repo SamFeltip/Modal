@@ -19,11 +19,19 @@ dialog#TB_window::backdrop {
 
 /* close backdrop */
 dialog#TB_window.closing::backdrop {
-  animation: close-modal-backdrop 0.2s ease forwards;
+  animation: close-modal-backdrop 0.2s ease;
 }
 
 
+@keyframes close-modal-swipe {
 
+  100% {
+    transform: scale(0);
+  }
+}
+dialog#TB_window.closing-swipe {
+  animation: close-modal-swipe 0.2s ease !important;
+}
 
 
 /* zoom modal animation */
@@ -124,17 +132,19 @@ dialog#TB_window.spin.closing {
     left: 0;
     transform: translate(
       calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y))
-      ) scale(0); 
+      ) scale(0) rotateX(90deg);  
+
   }
 }
 
 @keyframes lamp-close-modal {
+
   100% {
     top: 0;
     left: 0;
     transform: translate(
       calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y))
-      ) scale(0); 
+      ) scale(0) rotateX(90deg); 
 
   }
 }
@@ -146,7 +156,7 @@ dialog#TB_window.lamp[open] {
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
 
-  animation: lamp-open-modal 0.2s ease;
+  animation: lamp-open-modal 0.5s ease;
 }
 
 dialog#TB_window.lamp.closing {
