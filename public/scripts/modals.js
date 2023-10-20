@@ -217,6 +217,7 @@ function addDraggableToModal(modal){
 
   function releaseModalFromDrag(mouseX){
   
+    // if the original mouse down was over the TB_title
     if(mouseDownOnTBTitle){
       mouseDownOnTBTitle = false
 
