@@ -160,12 +160,14 @@ function addDraggableToModal(modal){
 
   var startingMousePositionX = 0;
 
-  function saveMouseDownPosition(mouseX, mouseY){
-
-    var elementUnderCursor = document.elementFromPoint(mouseX, mouseY)
+  function saveMouseDownPosition(event, mouseX, mouseY){
     
+    console.log(event.target);
+    
+    // console.log(document.elementsFromPoint(mouseX, mouseY));
+
     // if the user is trying to drag the title bar of the modal
-    if( elementUnderCursor.id == 'TB_title' || elementUnderCursor.id == 'TB_ajaxWindowTitle'){
+    if( event.target.id == 'TB_title' || event.target.id == 'TB_ajaxWindowTitle'){
       mouseDownOnTBTitle = true
     }
 
@@ -244,13 +246,13 @@ function addDraggableToModal(modal){
   var tbTitle = document.getElementById('TB_title')
 
   // touch screens need to use the title of the thickbox to swipe away instead of the entire modal, to prevent scroll interferance
-  tbTitle.addEventListener('touchstart', function (event) { saveMouseDownPosition(event.touches[0].pageX, event.touches[0].pageY) });
+  tbTitle.addEventListener('touchstart', function (event) { saveMouseDownPosition(event, event.touches[0].pageX, event.touches[0].pageY) });
   tbTitle.addEventListener('touchmove',  function (event) { dragModalWithAnimation(event.touches[0].pageX, event.touches[0].pageY)});
   tbTitle.addEventListener('touchend', function (event) { releaseModalFromDrag(event.changedTouches[0].pageX) });
 
 
   // add event listeners for dragging modals with mouse
-  modal.addEventListener("mousedown", function (event) {saveMouseDownPosition(event.pageX, event.pageY)})
+  modal.addEventListener("mousedown", function (event) {saveMouseDownPosition(event, event.pageX, event.pageY)})
   modal.addEventListener("mousemove", function (event) {dragModalWithAnimation(event.pageX, event.pageY)}, false);
   modal.addEventListener("mouseup", function (event) {releaseModalFromDrag(event.pageX)})
 }
