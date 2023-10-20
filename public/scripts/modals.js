@@ -1,9 +1,9 @@
 function addClosingProceduresToModal(modal, animationTimeMs = 200) {
   
   modal.addEventListener('mouseup', function (event) {
+    
     // Check if event.target (the thing being clicked) was the modal 
     // this will only be true if you click on the modal's ::backdrop
-  
     if (event.target === modal) {
       modal.classList.add('closing');
       setTimeout(() => {
@@ -67,6 +67,7 @@ function getThickboxDimentionsFromUrl(strModalAjaxURL) {
 
   return { width, height }
 }
+
 
 function createModalElement(thickbox_ajax_url, thickbox_header) {
 
@@ -148,7 +149,8 @@ function resizeThickbox(width, height) {
 
 }
 
-function addDragableToModal(modal){
+
+function addDraggableToModal(modal){
 
   var mouseDown = false;
 
@@ -257,7 +259,7 @@ function ssNewThickbox(thickbox_ajax_url, thickboxHyperlink=null) {
   modal.showModal();
   populateModalBodyWithAjaxRequest(thickbox_ajax_url)
 
-  addDragableToModal(modal)
+  addDraggableToModal(modal)
 
 }
 
@@ -269,6 +271,7 @@ function showModalOnButtonPress(event) {
 
   var thickboxHyperlink = event.target
 
+  // if you've clicked on an item within the thickbox link, find and target the parent thickbox element
   if (thickboxHyperlink.tagName !== 'A') {
     thickboxHyperlink = thickboxHyperlink.closest('.thickbox')
   }
@@ -289,11 +292,10 @@ function initialiseTB_windowOpenningProcedures() {
 
   for (var ombCount = 0; ombCount < thickboxButtons.length; ombCount++) {
     // ssHasClass
-    // add class thickboxapplied not openTB...
-    if (!thickboxButtons[ombCount].classList.contains('openTB_windowapplied')) {
+    if (!thickboxButtons[ombCount].classList.contains('thickboxapplied')) {
       thickboxButtons[ombCount].addEventListener('click', showModalOnButtonPress)
       // ssAddClass
-      thickboxButtons[ombCount].classList.add('openTB_windowapplied')
+      thickboxButtons[ombCount].classList.add('thickboxapplied')
     }
   }
 }
