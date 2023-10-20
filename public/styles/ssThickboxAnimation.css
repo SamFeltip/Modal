@@ -125,31 +125,38 @@ dialog#TB_window.spin.closing {
 
 
 
-/* spin modal animation */
-@keyframes lamp-open-modal{
-  0% {
+/* lamp modal animation */
+@keyframes lamp-open-modal
+{
+  0% 
+  {
     top: 0;
     left: 0;
-    transform: translate(
-      calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y))
-      ) scale(0) rotateX(90deg);  
+    transform: 
+      translate( calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y)) ) 
+      scale(0) 
+      rotateX(90deg);
 
   }
 }
 
-@keyframes lamp-close-modal {
+@keyframes lamp-close-modal 
+{
 
-  100% {
+  100% 
+  {
     top: 0;
     left: 0;
-    transform: translate(
-      calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y))
-      ) scale(0) rotateX(90deg); 
+    transform: 
+      translate( calc(-50% + var(--starting-x)), calc(-50% + var(--starting-y)) ) 
+      scale(0) 
+      rotateX(90deg); 
 
   }
 }
 
-dialog#TB_window.lamp[open] {
+dialog#TB_window.lamp[open] 
+{
   margin: 0;
 
   top: 50%;
@@ -159,7 +166,8 @@ dialog#TB_window.lamp[open] {
   animation: lamp-open-modal 0.5s ease;
 }
 
-dialog#TB_window.lamp.closing {
+dialog#TB_window.lamp.closing 
+{
   margin: 0;
   animation: lamp-close-modal 0.2s ease;
 }
