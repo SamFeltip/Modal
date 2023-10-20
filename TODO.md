@@ -9,7 +9,7 @@
     (reverse on open)
 - [x] thickbox without tbAnim will use 'legacy' animation
 - [x] see if its possible to make it emerge from the source `<a>` tag :check:
-- [ ] comment on CSS
+- [x] comment on CSS
 
 ### Notes
 
