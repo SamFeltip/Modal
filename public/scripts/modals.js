@@ -162,10 +162,13 @@ function addDraggableToModal(modal){
 
   function saveMouseDownPosition(mouseX, mouseY){
 
+    var elementUnderCursor = document.elementFromPoint(mouseX, mouseY)
+    
     // if the user is trying to drag the title bar of the modal
-    if(document.getElementById('TB_title') === document.elementFromPoint(mouseX, mouseY)){
+    if( elementUnderCursor.id == 'TB_title' || elementUnderCursor.id == 'TB_ajaxWindowTitle'){
       mouseDownOnTBTitle = true
     }
+
     
     var modalDimensions = modal.getBoundingClientRect()
 
