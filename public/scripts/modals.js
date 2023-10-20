@@ -239,9 +239,6 @@ function addDraggableToModal(modal){
         modal.style.margin = "";
       }
     }
-
-    
-    
   }
 
   var tbTitle = document.getElementById('TB_title')
