@@ -16,6 +16,10 @@ function getThickboxAnimationType(thickboxHyperlink){
 
 
 
+function addCSSAnimationLegacy(modal){
+  modal.classList.add('legacy')
+}
+
 function addCSSAnimationSpin(modal){
   modal.classList.add('spin')
 }
@@ -35,18 +39,15 @@ function addCSSAnimationLamp(modal, thickboxHyperlink){
   var starting_position_x = x + width/2
   var starting_position_y = y - height/2
 
+  // set initial thickbox hyperlink position as css variables for access in opening/closing animation
   document.documentElement.style.setProperty('--starting-x', starting_position_x + "px")
   document.documentElement.style.setProperty('--starting-y', starting_position_y + "px")
 
-
-  // console.log(document.documentElement.style.getPropertyValue('--starting-y'));
   modal.classList.add('lamp')
 }
 
 
-function addCSSAnimationLegacy(modal){
-  modal.classList.add('legacy')
-}
+
 
 function addAnimationToModal(modal, thickboxHyperlink){
   

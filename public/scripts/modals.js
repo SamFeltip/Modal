@@ -175,34 +175,45 @@ function addDraggableToModal(modal){
 
     if(mouseDown){
       
+      // calculate new position for the modal
       var translatePositionX = mouseX - mouseInModalX 
       var translatePositionY = mouseY - mouseInModalY
-      
-      console.log({mouseInModalX, mouseX});
-
-      console.log({translatePositionX});
 
       var distance_window_dragged = startingMousePositionX - mouseX
-      
+      var absolute_distance_window_dragged = Math.abs(distance_window_dragged)
 
-      var scale_amount = Math.pow(0.99, Math.max(0,Math.abs(distance_window_dragged) - 80))
+
+      // dont scale the window unless its been dragged more than 80 pixels
+      if(absolute_distance_window_dragged < 80){
+        absolute_distance_window_dragged = 0
+      }else {
+        absolute_distance_window_dragged -= 80
+      }
+      
+      // scale the window so that as you drag the window further, it gets smaller
+      var scale_amount = Math.pow(0.99, absolute_distance_window_dragged)
+
       var rotation_amount = distance_window_dragged * -1/20
 
-      modal.style.margin = 0
+      modal.style.margin = 0 //reset the default modal style (margin auto)
+      
+      // position the modal according to the mouse
       modal.style.top = translatePositionY + "px"
       modal.style.left = translatePositionX + "px"
       
+      // scale and rotate the modal
       modal.style.transform = "scale(" + scale_amount + ") rotate(" +rotation_amount+ "deg)"
     }
   }
 
-  function releaseModalFromDrag(mouseX, mouseY){
+  function releaseModalFromDrag(mouseX){
   
     mouseDown = false
 
     var distance_dragged = Math.abs(startingMousePositionX - mouseX)
 
-    if(modal === document.elementFromPoint(mouseX, mouseY) && distance_dragged > 50){
+    // if the user has dragged the modal far enough, close it
+    if(distance_dragged > 80){
         modal.classList.add('closing-swipe');
         
         setTimeout(() => {
@@ -210,6 +221,7 @@ function addDraggableToModal(modal){
         }, 200)
 
     }else {
+      // otherwise reset the inline styles set by dragging
       modal.style.top = "";
       modal.style.left = "";
       modal.style.transform = "";
@@ -220,29 +232,30 @@ function addDraggableToModal(modal){
 
   var tbTitle = document.getElementById('TB_title')
 
-  // touch screens need to use the title of the thickbox to swipe away instead of the entire modal
+  // touch screens need to use the title of the thickbox to swipe away instead of the entire modal, to prevent scroll interferance
   tbTitle.addEventListener('touchstart', function (event) { saveMouseDownPosition(event.touches[0].pageX, event.touches[0].pageY) });
   tbTitle.addEventListener('touchmove',  function (event) { dragModalWithAnimation(event.touches[0].pageX, event.touches[0].pageY)});
-  tbTitle.addEventListener('touchend', function (event) { releaseModalFromDrag(event.changedTouches[0].pageX, event.changedTouches[0].pageY) });
+  tbTitle.addEventListener('touchend', function (event) { releaseModalFromDrag(event.changedTouches[0].pageX) });
 
 
   modal.addEventListener("mousedown", function (event) {saveMouseDownPosition(event.pageX, event.pageY)})
   modal.addEventListener("mousemove", function (event) {dragModalWithAnimation(event.pageX, event.pageY)}, false);
-  modal.addEventListener("mouseup", function (event) {releaseModalFromDrag(event.pageX, event.pageY)})
+  modal.addEventListener("mouseup", function (event) {releaseModalFromDrag(event.pageX)})
 }
 
 function ssNewThickbox(thickbox_ajax_url, thickboxHyperlink=null) {
+
+  // if a modal already exists, get rid of it
+  var existingModal = document.getElementById("TB_window")
+  if (existingModal) {
+    existingModal.remove();
+  }
+
 
   var thickbox_header = thickboxHyperlink?.getAttribute('title');
 
   if(!thickbox_header) {
     thickbox_header = "thickbox"
-  }
-
-
-  var existingModal = document.getElementById("TB_window")
-  if (existingModal) {
-    existingModal.remove();
   }
 
   var modal = createModalElement(thickbox_ajax_url, thickbox_header)
