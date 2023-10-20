@@ -8,7 +8,7 @@
     scale window and move it towards link until invisible
     (reverse on open)
 - [x] thickbox without tbAnim will use 'legacy' animation
-
+- [x] see if its possible to make it emerge from the source `<a>` tag :check:
 
 ### Notes
 
@@ -20,4 +20,3 @@ thickbox.css
 thickboxanimation.css
 ```
 
-see if its possible to make it emerge from the source `<a>` tag :check:
