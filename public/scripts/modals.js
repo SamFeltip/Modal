@@ -247,7 +247,7 @@ function ssNewThickbox(thickbox_ajax_url, thickboxHyperlink=null) {
 
   document.body.appendChild(modal);
 
-  addClosingProceduresToModal(modal, 200)
+  addClosingProceduresToModal(modal, 2000)
 
   // defined in ssThickboxAnimation
   if (!(addAnimationToModal === undefined)) {

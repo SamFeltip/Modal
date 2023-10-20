@@ -19,7 +19,7 @@ dialog#TB_window::backdrop {
 
 /* close backdrop */
 dialog#TB_window.closing::backdrop {
-  animation: close-modal-backdrop 0.2s ease;
+  animation: close-modal-backdrop 0.2s ease forwards;
 }
 
 
@@ -52,7 +52,7 @@ dialog#TB_window.zoom[open] {
 }
 
 dialog#TB_window.zoom.closing {
-  animation: zoom-close-modal 0.2s ease;
+  animation: zoom-close-modal 0.2s ease forwards;
 }
 
 /* glide modal animation */
@@ -76,7 +76,7 @@ dialog#TB_window.glide[open] {
 }
 
 dialog#TB_window.glide.closing {
-  animation: glide-close-modal 0.2s ease;
+  animation: glide-close-modal 0.2s ease forwards;
 }
 
 
@@ -98,7 +98,7 @@ dialog#TB_window.legacy[open] {
 }
 
 dialog#TB_window.legacy.closing {
-  animation: legacy-close-modal 0.2s ease;
+  animation: legacy-close-modal 0.2s ease forwards;
 }
 
 
@@ -120,7 +120,7 @@ dialog#TB_window.spin[open] {
 }
 
 dialog#TB_window.spin.closing {
-  animation: spin-close-modal 0.2s ease;
+  animation: spin-close-modal 0.2s ease forwards;
 }
 
 
@@ -164,10 +164,22 @@ dialog#TB_window.lamp[open]
   transform: translate(-50%, -50%) scale(1);
 
   animation: lamp-open-modal 0.5s ease;
+
 }
+
+dialog#TB_window.lamp.closing #TB_title {
+  background-color: white !important;
+  transition: background-color 0.2s ease;
+}
+
+dialog#TB_window.lamp.closing #TB_closeWindowButton {
+  background-color: white !important;
+  transition: background-color 0.2s ease;
+}
+
 
 dialog#TB_window.lamp.closing 
 {
   margin: 0;
-  animation: lamp-close-modal 0.2s ease;
+  animation: lamp-close-modal 0.2s ease forwards;
 }
