@@ -257,7 +257,7 @@ function addDraggableToModal(modal){
   modal.addEventListener("mouseup", function (event) {releaseModalFromDrag(event.pageX)})
 }
 
-function ssNewThickbox(thickbox_ajax_url, thickboxHyperlink=null) {
+function ssDialogThickbox(thickbox_ajax_url, thickboxHyperlink=null) {
 
   // if a modal already exists, get rid of it
   var existingModal = document.getElementById("TB_window")
@@ -310,11 +310,11 @@ function showModalOnButtonPress(event) {
   //replace spaces with %20 for IE7 (and maybe others)
   thickbox_ajax_url = thickbox_ajax_url.replace(/ /gi, "%20")
 
-  ssNewThickbox(thickbox_ajax_url, thickboxHyperlink)
+  ssDialogThickbox(thickbox_ajax_url, thickboxHyperlink)
 }
 
 
-function initialiseTB_windowOpenningProcedures() {
+function initialiseTB_windowOpeningProcedures() {
   var thickboxButtons = document.getElementsByClassName('thickbox');
 
   for (var ombCount = 0; ombCount < thickboxButtons.length; ombCount++) {
@@ -327,4 +327,4 @@ function initialiseTB_windowOpenningProcedures() {
   }
 }
 
-initialiseTB_windowOpenningProcedures()
+initialiseTB_windowOpeningProcedures()
