@@ -23,6 +23,7 @@ dialog#TB_window.closing::backdrop {
 }
 
 
+/* animation for closing the modal by swiping it away */
 @keyframes close-modal-swipe {
 
   100% {

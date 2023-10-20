@@ -152,7 +152,7 @@ function resizeThickbox(width, height) {
 
 function addDraggableToModal(modal){
 
-  var mouseDown = false;
+  var mouseDownOnTBTitle = false;
 
   // position of mouse on modal
   var mouseInModalX = 0;
@@ -162,38 +162,44 @@ function addDraggableToModal(modal){
 
   function saveMouseDownPosition(mouseX, mouseY){
 
-    mouseDown = true
+    // if the user is trying to drag the title bar of the modal
+    if(document.getElementById('TB_title') === document.elementFromPoint(mouseX, mouseY)){
+      mouseDownOnTBTitle = true
+    }
+    
     var modalDimensions = modal.getBoundingClientRect()
 
+    // get the relative position of the mouse from inside the modal
     mouseInModalX = mouseX - modalDimensions.x
     mouseInModalY = mouseY - modalDimensions.y
 
+    // save the initial position of the mouse
     startingMousePositionX = mouseX;
   }
 
   function dragModalWithAnimation(mouseX, mouseY){
 
-    if(mouseDown){
+    if(mouseDownOnTBTitle){
       
       // calculate new position for the modal
       var translatePositionX = mouseX - mouseInModalX 
       var translatePositionY = mouseY - mouseInModalY
 
-      var distance_window_dragged = startingMousePositionX - mouseX
-      var absolute_distance_window_dragged = Math.abs(distance_window_dragged)
+      var distance_modal_dragged = startingMousePositionX - mouseX
+      var absolute_distance_modal_dragged = Math.abs(distance_modal_dragged)
 
 
       // dont scale the window unless its been dragged more than 80 pixels
-      if(absolute_distance_window_dragged < 80){
-        absolute_distance_window_dragged = 0
+      if(absolute_distance_modal_dragged < 80){
+        absolute_distance_modal_dragged = 0
       }else {
-        absolute_distance_window_dragged -= 80
+        absolute_distance_modal_dragged -= 80
       }
       
       // scale the window so that as you drag the window further, it gets smaller
-      var scale_amount = Math.pow(0.99, absolute_distance_window_dragged)
+      var scale_amount = Math.pow(0.99, absolute_distance_modal_dragged)
 
-      var rotation_amount = distance_window_dragged * -1/20
+      var rotation_amount = distance_modal_dragged * -1/20
 
       modal.style.margin = 0 //reset the default modal style (margin auto)
       
@@ -208,25 +214,29 @@ function addDraggableToModal(modal){
 
   function releaseModalFromDrag(mouseX){
   
-    mouseDown = false
+    if(mouseDownOnTBTitle){
+      mouseDownOnTBTitle = false
 
-    var distance_dragged = Math.abs(startingMousePositionX - mouseX)
+      var absolute_distance_modal_dragged = Math.abs(startingMousePositionX - mouseX)
 
-    // if the user has dragged the modal far enough, close it
-    if(distance_dragged > 80){
-        modal.classList.add('closing-swipe');
-        
-        setTimeout(() => {
-          modal.remove()
-        }, 200)
-
-    }else {
-      // otherwise reset the inline styles set by dragging
-      modal.style.top = "";
-      modal.style.left = "";
-      modal.style.transform = "";
-      modal.style.margin = "";
+      // if the user has dragged the modal far enough, close it
+      if(absolute_distance_modal_dragged > 80){
+          modal.classList.add('closing-swipe');
+          
+          setTimeout(() => {
+            modal.remove()
+          }, 200)
+  
+      }else {
+        // otherwise reset the inline styles set by dragging
+        modal.style.top = "";
+        modal.style.left = "";
+        modal.style.transform = "";
+        modal.style.margin = "";
+      }
     }
+
+    
     
   }
 
@@ -238,6 +248,7 @@ function addDraggableToModal(modal){
   tbTitle.addEventListener('touchend', function (event) { releaseModalFromDrag(event.changedTouches[0].pageX) });
 
 
+  // add event listeners for dragging modals with mouse
   modal.addEventListener("mousedown", function (event) {saveMouseDownPosition(event.pageX, event.pageY)})
   modal.addEventListener("mousemove", function (event) {dragModalWithAnimation(event.pageX, event.pageY)}, false);
   modal.addEventListener("mouseup", function (event) {releaseModalFromDrag(event.pageX)})
