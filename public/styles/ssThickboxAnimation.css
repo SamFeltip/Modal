@@ -30,13 +30,14 @@ dialog#TB_window.closing::backdrop {
     transform: scale(0);
   }
 }
+
 dialog#TB_window.closing-swipe {
   animation: close-modal-swipe 0.2s ease !important;
 }
 
 
 /* spin modal animation */
-@keyframes legacy-open-modal{
+@keyframes legacy-open-modal {
   0% {
     opacity: 0;
   }
@@ -70,7 +71,7 @@ dialog#TB_window.legacy.closing {
 
 @keyframes zoom-close-modal {
   100% {
-    transform: scale(0); 
+    transform: scale(0);
   }
 }
 
@@ -99,7 +100,7 @@ dialog#TB_window.zoom.closing {
 
 dialog#TB_window.glide[open] {
   animation: glide-open-modal 0.2s ease;
-  
+
 }
 
 dialog#TB_window.glide.closing {
@@ -108,19 +109,17 @@ dialog#TB_window.glide.closing {
 
 
 /* spin modal animation */
-@keyframes spin-open-modal{
+@keyframes spin-open-modal {
   0% {
-    transform: 
-      rotate(180deg)
-      scale(0); 
+    transform:
+      rotate(180deg) scale(0);
   }
 }
 
 @keyframes spin-close-modal {
   100% {
-    transform: 
-      rotate(180deg)
-      scale(0); 
+    transform:
+      rotate(180deg) scale(0);
   }
 }
 
@@ -135,41 +134,35 @@ dialog#TB_window.spin.closing {
 
 
 /* lamp modal animation */
-@keyframes lamp-open-modal
-{
+@keyframes lamp-open-modal {
 
   /* 0% means the below CSS is how the animation will begin */
-  0% 
-  {
+  0% {
     /* the initial position of the modal is set by javascript in ssThickboxAnimation */
     top: var(--starting-y);
     left: var(--starting-x);
 
     /* begin the  element in the center of the thickbox link */
-    transform: 
-      translate(-50%, -50%)
-      scale(0)
+    transform:
+      translate(-50%, -50%) scale(0)
   }
 }
 
-@keyframes lamp-close-modal 
-{
+@keyframes lamp-close-modal {
 
   /* 100% means the below CSS is how the animation will finish */
-  100% 
-  {
+  100% {
     /* the final position of the modal is set by javascript in ssThickboxAnimation */
     top: var(--starting-y);
     left: var(--starting-x);
-    transform: 
-      translate(-50%, -50%)
-      scale(0)
+    transform:
+      translate(-50%, -50%) scale(0)
   }
 }
 
-dialog#TB_window.lamp[open] 
-{
-  margin: 0; /* remove the default (margin auto) behaviour of <dialog>  */
+dialog#TB_window.lamp[open] {
+  margin: 0;
+  /* remove the default (margin auto) behaviour of <dialog>  */
 
   /* position dialog in the middle of the screen */
   top: 50%;
@@ -190,8 +183,7 @@ dialog#TB_window.lamp.closing #TB_closeAjaxWindow {
 }
 
 
-dialog#TB_window.lamp.closing 
-{
+dialog#TB_window.lamp.closing {
   margin: 0;
   animation: lamp-close-modal 0.2s ease forwards;
 }
